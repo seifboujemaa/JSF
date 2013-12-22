@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/template/template.xhtml"
+      xmlns:p="http://primefaces.org/ui"> 
+<ui:define name="titlecontent">Chef editor management</ui:define>
+
+<ui:define name="content2">
+<div id="content">
+			<div class="post">
+				<h2 class="title">ChefEditor Administration zone</h2>
+				<br></br>
+
+				<h:form id="table">
+					<p:dataTable value="#{administratrBean.chefEditors}" var="c" border="1"
+						rendered="#{not empty administratrBean.agents}" paginator="true"
+						rows="10" widgetVar="ficheTable2"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
+						rowsPerPageTemplate="5,10,15">
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Search   " />
+								<p:inputText id="globalFilter" onkeyup="ficheTable2.filter()"
+									style="width:150px"></p:inputText>
+							</p:outputPanel>
+						</f:facet>
+<!-- 						<f:facet name="header"> -->
+<!-- 							<h:outputText value="ALl AGENTS" /> -->
+<!-- 						</f:facet> -->
+
+
+<!-- <p:column filterBy="#{ag.firstName}" filterMatchMode="contains"> -->
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first Name" />
+							</f:facet>
+							<h:outputText value="#{c.firstName}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="last Name" />
+							</f:facet>
+							<h:outputText value="#{c.lastName}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="login" />
+							</f:facet>
+							<h:outputText value="#{c.login}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="password" />
+							</f:facet>
+							<h:outputText value="#{c.pwd}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Email" />
+							</f:facet>
+							<h:outputText value="#{c.email}" />
+						</p:column>
+
+						<p:column>
+							<p:commandButton value="delete" 
+								action="#{administratrBean.formDisplayDelete()}" ajax="false"
+								styleClass="btn btn-success">
+								<f:setPropertyActionListener target="#{administratrBean.chefEditor}"
+									value="#{c}"></f:setPropertyActionListener>
+							</p:commandButton>
+						</p:column>
+
+						<p:column>
+							<p:commandButton value="update" ajax="false"
+								action="#{administratrBean.formDisplayUpdate()}"
+								styleClass="btn btn-success" >
+								<f:setPropertyActionListener target="#{administratrBean.chefEditor}"
+									value="#{c}"></f:setPropertyActionListener>
+							</p:commandButton>
+						</p:column>
+
+
+					</p:dataTable>
+
+					<p:commandButton value="NEW"
+						action="#{administratrBean.formDisplayAdd()}" ajax="false" 
+						styleClass="btn btn-success" />
+
+				</h:form>
+
+				<br></br>
+				<br></br>
+
+				<h:form id="chefAdd" rendered="#{administratrBean.bool}">
+					<p:panelGrid columns="3">
+
+						<h:outputLabel value="First Name" />
+						<p:inputText value="#{administratrBean.chefEditor.firstName}" id="p1" required="true" requiredMessage="first name is required"/>
+						<h:message for="p1" />
+
+
+						<h:outputLabel value="Last Name" />
+						<p:inputText value="#{administratrBean.chefEditor.lastName}" id="p2" requiredMessage="last name is required" required="true"/>
+						<h:message for="p2" />
+
+
+						<h:outputLabel value="Login" />
+						<p:inputText value="#{administratrBean.chefEditor.login}" id="p3" requiredMessage="login is required"  required="true"/>
+						<h:message for="p3" />
+
+
+						<h:outputLabel value="Password" />
+						<p:password value="#{administratrBean.chefEditor.pwd}" id="p4" requiredMessage="password is required" required="true"/>
+						<h:message for="p4" />
+
+
+						<h:outputLabel value="Email" />
+						<p:inputText value="#{administratrBean.chefEditor.email}" id="p5" requiredMessage="email is required" required="true"/>
+						<h:message for="p5" />
+					</p:panelGrid>
+
+					<p:panelGrid columns="3">
+						<p:commandButton value="Add ChefEditor"
+							action="#{administratrBean.doAddChef()}"
+							rendered="#{administratrBean.boolAdd}" ajax="true" update=":table">
+							<p:confirm header="Confirmation" message="Are you sur?" />
+							 </p:commandButton>
+						<p:commandButton value="delete ChefEditor"
+							action="#{administratrBean.doDeleteChef()}"
+							rendered="#{administratrBean.boolDelete}"  ajax="true" update=":table">
+							<p:confirm header="Confirmation" message="Are you sur?" />
+							</p:commandButton>
+						<p:commandButton value="update ChefEditor"
+							action="#{administratrBean.doUpdateChef()}"
+							rendered="#{administratrBean.boolUpdate}" ajax="true" update=":table">
+							<p:confirm header="Confirmation" message="Are you sur?" />
+							</p:commandButton>
+					</p:panelGrid>
+				</h:form>
+
+
+
+
+
+			</div>
+		</div>
+
+</ui:define>
+
+
+</ui:composition>

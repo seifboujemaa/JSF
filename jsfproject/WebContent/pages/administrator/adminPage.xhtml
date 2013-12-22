@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/template/template.xhtml"> 
+
+<ui:define name="titlecontent"> 
+Home Admin
+</ui:define>
+<ui:define name="content2">
+<div id="content">
+			<div class="post">
+				<h2 class="title">Please, choose an  action to do </h2>
+<h:form>
+<br></br><br></br>
+<ul>
+<li><h:commandLink action="reporterPage?faces-redirect=true" value="Manage Reporter" /></li><br></br>
+<li><h:commandLink action="agentPage?faces-redirect=true" value="Manage Agent" /></li><br></br>
+<li><h:commandLink action="chefEditor?faces-redirect=true" value="Manage Chef Editor" /></li><br></br>
+<li><h:commandLink action="clientPage?faces-redirect=true" value="Manage Client" /></li><br></br>
+</ul>
+</h:form>
+</div>
+</div>
+</ui:define>
+</ui:composition>

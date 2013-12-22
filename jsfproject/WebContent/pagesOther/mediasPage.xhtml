@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titlecontent">Medias</ui:define>
+	<ui:define name="content2">
+
+
+		<h:form>
+			<div id="content">
+
+				<h2>Photos</h2>
+
+				<ui:repeat value="#{photoBean.photos}" var="item" varStatus="loop">
+					<div class="post">
+
+						<div class="entry">
+							<h:outputText
+								value="&lt;/div&gt;&lt;div style='float: left;'&gt;"
+								escape="false"
+								rendered="#{not loop.first and loop.index % 3 == 0}" />
+							<div>#{item.description}</div>
+							<br></br>
+							<!--  <div><p:graphicImage value="#{item.image}"  > </p:graphicImage>  </div>  -->
+							<div>
+								<h:graphicImage value="#{item.url}" />
+							</div>
+
+
+						</div>
+					</div>
+				</ui:repeat>
+				<hr></hr>
+				<div class="post">
+					<h2>Videos</h2>
+					<div class="entry">
+
+						<ui:repeat value="#{photoBean.videos}" var="item" varStatus="loop">
+
+							<h:outputText
+								value="&lt;/div&gt;&lt;div style='float: left;'&gt;"
+								escape="false"
+								rendered="#{not loop.first and loop.index % 3 == 0}" />
+							<div>#{item.description}</div>
+							<br></br>
+							<p:media value="#{item.url}" width="600" height="350"
+								player="flash" />
+							<br></br>
+							<br></br>
+
+
+						</ui:repeat>
+
+
+
+
+					</div>
+
+
+				</div>
+
+			</div>
+
+			<!-- 					<p:galleria effect="slide" effectSpeed="1000">   -->
+			<!--     <ui:repeat value="#{photoBean.photos}" var="image">   -->
+			<!--         <p:graphicImage value="#{image.image}"   -->
+			<!--             title="#{image}" alt="Description goes here"/>   -->
+			<!--     </ui:repeat>   -->
+			<!-- </p:galleria> -->
+
+
+		</h:form>
+
+
+
+
+
+
+	</ui:define>
+
+
+
+</ui:composition>

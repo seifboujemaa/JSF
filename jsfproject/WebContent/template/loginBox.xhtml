@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	 xmlns:p="http://primefaces.org/ui">
+	
+<f:loadBundle basename="#{languageBean.language}" var="msg"/>
+
+	<h:form id="form23" rendered="#{!authentificationBean.bool}">
+
+		<ul>
+			<li>
+			
+				<h2>#{msg.register}</h2> <h:form>
+					<h:panelGrid columns="2">
+						<h:outputText value="#{msg.login}" />
+						<p:inputText value="#{authentificationBean.user.login}"/>
+						<h:outputText value="#{msg.password}" />
+						<p:password value="#{authentificationBean.user.pwd}" />
+						<p></p>
+						<p:commandButton action="#{authentificationBean.doLogin()}"
+							value="#{msg.connexion}" id="loginSubmit" />
+						<!-- 	<h:message for="loginSubmit"/> -->
+					</h:panelGrid>
+					<p:commandLink action="/register?faces-redirect=true"
+						value="#{msg.register}" />   #{msg.if_you_dont_have}
+							</h:form>
+			</li>
+		</ul>
+	</h:form>
+
+
+	<h:form id="form22" rendered="#{authentificationBean.bool}">
+		<ul>
+			<li>
+				<h2>#{msg.logout}</h2> #{msg.welcome} #{authentificationBean.user.login} ! #{msg.click_on} <h:commandLink
+					action="#{authentificationBean.doLogout()}" value="#{msg.logout}" /> #{msg.to_disconnect}
+					
+			</li>
+		</ul>
+		<br></br>
+	</h:form>
+
+
+</ui:composition>

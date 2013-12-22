@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml"
+	 xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jstl/core">
+
+	<ui:define name="titlecontent">Articles</ui:define>
+
+	<ui:define name="content2">
+	<h:form>
+	 <div id="content"> 
+	 
+				
+				
+				<ui:repeat value="#{articleBean.articles}" var="item" varStatus="loop">
+				<div class="post">
+				
+				 <div class="entry">
+        <h:outputText value="&lt;/div&gt;&lt;div style='float: left;'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
+        <div><h2 class="title">#{item.title} | #{item.day}</h2></div>
+        <br></br>
+        <div>#{item.paragraph}</div>
+        
+        </div>
+        </div>
+    </ui:repeat>
+				
+				</div>  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+				
+				
+				
+				
+				
+				
+	
+
+	
+	
+	</h:form>
+	</ui:define>
+</ui:composition>

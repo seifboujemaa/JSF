@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+
+
+	<ui:define name="titlecontent">Welcome</ui:define>
+
+	<ui:define name="content2">
+		<div id="content">
+		
+		
+		<div class="post">
+				<h2 class="title">Informations</h2>
+
+				<div class="entry">
+				
+				The 2014 FIFA World Cup qualification was a series of tournaments organised by the six FIFA confederations. The 2014 World Cup will feature 32 teams, with one place reserved for the host nation, Brazil. The remaining 31 places were determined by a qualification process, in which the other 207 teams, from the six FIFA confederations, competed. Most of the successful teams were determined within these confederations, with a limited number of inter-confederation play-offs occurring at the end of the process.
+				<br></br><br></br>
+				<h:graphicImage value="/resources/images/cup.jpg" /><br></br><br></br><br></br>
+				If you  are not register yet ,  you  should try create your own account by  filling the register form in  the bottom of the  page :)
+					<br></br>
+				</div>
+			</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<div class="post">
+				<h2 class="title">Registration</h2>
+
+				<div class="entry">
+					<h:form id="name">
+						
+						<h:panelGrid columns="3">
+							<h:outputLabel value="first Name" for="a1" />
+							<h:inputText value="#{clientBean.firstName}" id="a1" >
+							<f:converter converterId="firstNameConverter" />
+							</h:inputText>
+							<h:message  for="a1"/>
+			
+							<h:outputLabel value="last Name" for="a2" />
+							<h:inputText value="#{clientBean.firstName}" required="true" id="a2" />
+							<h:message  for="a2"/>
+							
+							<h:outputLabel value="Login" for="a3" />
+							<h:inputText value="null" id="a3" />
+							<h:message  for="a3"/>
+							
+							<h:outputLabel value="Password" for="a4" />
+							<h:inputSecret value="null" id="a4" />
+							<h:message  for="a4"/>
+							
+							<h:outputLabel value="Email" for="a5" />
+							<h:inputText value="null" id="a5" />
+							<h:message  for="a5"/>
+							<p></p>
+							<h:commandButton action="#{clientBean.DoRegister()}"
+								value="Confirm">
+								
+							</h:commandButton>
+						</h:panelGrid>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

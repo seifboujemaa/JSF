@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<f:loadBundle basename="#{languageBean.language}" var="msg"/>
+
+      	<div id="sidebar">
+      	
+      	         
+					<ul>
+						<li>
+							<h2>#{msg.site_description}</h2>
+							<p>#{msg.site_description_description}</p>
+						</li>
+						
+				         
+						<ui:include src="/template/loginBox.xhtml" />
+                        <h:form>				
+						<li>
+							<h2>#{msg.links}</h2>
+							<ul>
+								<li><h:commandLink action="/register?faces-redirect=true" value="#{msg.home}" />   </li>
+								<!-- <li><a href="#">#{msg.articles}</a></li> -->
+								<li> <h:commandLink action="/pagesOther/articlesPage?faces-redirect=true" value="#{msg.articles}" />  </li>
+								<li><h:commandLink action="/pagesOther/mediasPage?faces-redirect=true" value="#{msg.medias}" />  </li>
+							<h:form	id="menuForm" rendered="#{authentificationBean.bool}">
+								<li><a href="#">#{msg.store}</a></li>
+								<li><a href="#">#{msg.tournament_shoulder}</a></li>
+								<!-- <li><a href="#">#{msg.administration}</a></li> -->
+								<li>  <p:commandLink action="/pages/administrator/adminPage?faces-redirect=true" value="#{msg.administration}" rendered="#{authentificationBean.boolAdministrator}" /> </li>
+								<li>  <p:commandLink action="/pages/Agent/agentHome?faces-redirect=true" value="#{msg.administration}" rendered="#{authentificationBean.boolAgent}" /> </li>
+								<li>  <p:commandLink action="/pages/ChefEditor/chefEditorHome?faces-redirect=true" value="#{msg.administration}" rendered="#{authentificationBean.boolChefEditor}" /> </li>
+								<li>  <p:commandLink action="/pages/Journalist/journalistHome?faces-redirect=true" value="#{msg.administration}" rendered="#{authentificationBean.boolJournalist}" /> </li>
+								<li>  <p:commandLink action="/pages/FreeLance/freeLanceHome?faces-redirect=true" value="#{msg.administration}" rendered="#{authentificationBean.boolFreeLance}" /> </li>
+								<li>  <p:commandLink action="/pages/Reporter/reporterHome?faces-redirect=true" value="#{msg.administration}" rendered="#{authentificationBean.boolReporter}" /> </li>
+								
+							</h:form>	
+							</ul>
+						</li>
+						</h:form>
+						
+						
+						<h:form	id="adForm" rendered="#{ ! authentificationBean.bool}">
+						<li>
+							<h2>#{msg.ad}</h2>
+							<ul>
+								
+							<h:graphicImage value="/resources/images/coca_cola.jpg" />
+								
+								
+							</ul>
+						</li>
+						</h:form>
+						
+					</ul>
+					
+					
+				</div>
+				<!-- end #sidebar -->
+				<div style="clear: both;">&nbsp;</div>
+     
+</ui:composition>

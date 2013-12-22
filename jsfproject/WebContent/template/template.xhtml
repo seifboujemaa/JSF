@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+<h:outputStylesheet library="css" name="style.css"  />
+<title><ui:insert name="titlecontent"/></title>
+</h:head> 
+<body> 
+
+<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+			<p:commandButton value="Oui" type="button"
+				styleClass="ui-confirmdialog-yes"  />
+			<p:commandButton value="Non" type="button"
+				styleClass="ui-confirmdialog-no"  />
+		</p:confirmDialog>
+
+<ui:include src="/template/menu.xhtml" />
+
+
+
+<div id="wrapper"> 
+<ui:include src="/template/title.xhtml" />
+<div id="page">
+<div id="page-bgtop">
+<div id="page-bgbtm">
+<ui:insert name="content2"/>
+ <ui:include src="/template/sideBox.xhtml" />
+</div>
+</div>
+</div>
+</div>
+
+
+
+<ui:include src="/template/footer.xhtml" />
+
+
+
+
+
+
+
+
+
+
+
+</body> 
+</html>

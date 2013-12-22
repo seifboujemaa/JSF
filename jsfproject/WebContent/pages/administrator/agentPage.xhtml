@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml" 
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+
+	<ui:define name="titlecontent">Agent management</ui:define>
+
+	<ui:define name="content2">
+
+		<div id="content">
+			<div class="post">
+				<h2 class="title">Agent Administration zone</h2>
+				<br></br>
+
+				<h:form id="table">
+					<p:dataTable value="#{administratrBean.agents}" var="ag" border="1"
+						rendered="#{not empty administratrBean.agents}" paginator="true"
+						rows="10" widgetVar="ficheTable"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
+						rowsPerPageTemplate="5,10,15" >
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Search   " />
+								<p:inputText id="globalFilter" onkeyup="ficheTable.filter()"
+									style="width:150px" ></p:inputText>
+							</p:outputPanel>
+						</f:facet>
+<!-- 						<f:facet name="header"> -->
+<!-- 							<h:outputText value="ALl AGENTS" /> -->
+<!-- 						</f:facet> -->
+
+
+ <!-- <p:column filterBy="#{ag.firstName}" filterMatchMode="contains"> -->
+						<p:column> 
+							<f:facet name="header">
+								<h:outputText value="first Name" />
+							</f:facet>
+							<h:outputText value="#{ag.firstName}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="last Name" />
+							</f:facet>
+							<h:outputText value="#{ag.lastName}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="login" />
+							</f:facet>
+							<h:outputText value="#{ag.login}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="password" />
+							</f:facet>
+							<h:outputText value="#{ag.pwd}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Email" />
+							</f:facet>
+							<h:outputText value="#{ag.email}" />
+						</p:column>
+
+						<p:column>
+							<p:commandButton value="delete" 
+								action="#{administratrBean.formDisplayDelete()}" ajax="false"
+								styleClass="btn btn-success">
+								<f:setPropertyActionListener target="#{administratrBean.agent}"
+									value="#{ag}"></f:setPropertyActionListener>
+							</p:commandButton>
+						</p:column>
+
+						<p:column>
+							<p:commandButton value="update" ajax="false"
+								action="#{administratrBean.formDisplayUpdate()}"
+								styleClass="btn btn-success" >
+								<f:setPropertyActionListener target="#{administratrBean.agent}"
+									value="#{ag}"></f:setPropertyActionListener>
+							</p:commandButton>
+						</p:column>
+
+
+					</p:dataTable>
+
+					<p:commandButton value="NEW"
+						actionListener="#{administratrBean.formDisplayAdd()}" ajax="false"
+						styleClass="btn btn-success" />
+
+				</h:form>
+
+				<br></br>
+				<br></br>
+
+				<h:form id="agentAdd" rendered="#{administratrBean.bool}">
+					<p:panelGrid columns="3">
+
+						<h:outputLabel value="First Name" />
+						<p:inputText value="#{administratrBean.agent.firstName}" id="z1" required="true" requiredMessage="first name is required"/>
+						<h:message for="z1" />
+
+
+						<h:outputLabel value="Last Name" />
+						<p:inputText value="#{administratrBean.agent.lastName}" id="z2" requiredMessage="last name is required" required="true"/>
+						<h:message for="e2" />
+
+
+						<h:outputLabel value="Login" />
+						<p:inputText value="#{administratrBean.agent.login}" id="z3" requiredMessage="login is required"  required="true"/>
+						<h:message for="z3" />
+
+
+						<h:outputLabel value="Password" />
+						<p:password value="#{administratrBean.agent.pwd}" id="z4" requiredMessage="password is required" required="true"/>
+						<h:message for="z4" />
+
+
+						<h:outputLabel value="Email" />
+						<p:inputText value="#{administratrBean.agent.email}" id="z5" requiredMessage="email is required" required="true"/>
+						<h:message for="z5" />
+					</p:panelGrid>
+
+					<p:panelGrid columns="3">
+						<p:commandButton value="Add Agent"
+							action="#{administratrBean.doAddAgent()}"
+							rendered="#{administratrBean.boolAdd}" ajax="true" update=":table">
+							<p:confirm header="Confirmation" message="Are you  sure ?" />
+							 </p:commandButton>
+						<p:commandButton value="delete Agent"
+							action="#{administratrBean.doDeleteAgent()}"
+							rendered="#{administratrBean.boolDelete}" ajax="true" update=":table">
+							<p:confirm header="Confirmation" message="Are you  sure ?" />
+							</p:commandButton>
+						<p:commandButton value="update Agent"
+							action="#{administratrBean.doUpdate()}"
+							rendered="#{administratrBean.boolUpdate}" ajax="true" update=":table">
+							<p:confirm header="Confirmation" message="Are you  sure ?" />
+							</p:commandButton>
+					</p:panelGrid>
+				</h:form>
+
+
+
+
+
+			</div>
+		</div>
+
+
+	</ui:define>
+
+
+
+</ui:composition>
