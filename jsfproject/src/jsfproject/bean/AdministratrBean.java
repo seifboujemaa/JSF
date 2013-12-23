@@ -173,12 +173,12 @@ public class AdministratrBean implements Serializable{
 	
 	
 	
-	public String formDisplayAdd(){
+	public void formDisplayAdd(){
 		boolAdd = true;
 		boolDelete = false;
 		boolUpdate = false;
 		bool =true;
-		return null;
+		
 	}
 	
 	public String formDisplayDelete(){
@@ -332,6 +332,14 @@ public String doUpdateClient(){
 	clients = localClient.findAllClient();
 	return null ;
 }
+
+public String hideAddAgentDialog(){
+	agent = new Agent();
+	
+	return "PF('agentAdd').hide();";
+}
+
+
 	
 	
 

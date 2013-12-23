@@ -3,10 +3,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/template.xhtml" 
-	xmlns:p="http://primefaces.org/ui">
-	
-	
+	template="/template/template.xhtml" xmlns:p="http://primefaces.org/ui">
+
+
 
 	<ui:define name="titlecontent">Agent management</ui:define>
 
@@ -17,49 +16,52 @@
 				<h2 class="title">Agent Administration zone</h2>
 				<br></br>
 
+
 				<h:form id="table">
-					<p:dataTable value="#{administratrBean.agents}" var="ag" border="1"
+					<p:dataTable value="#{administratrBean.agents}" var="ag"
 						rendered="#{not empty administratrBean.agents}" paginator="true"
 						rows="10" widgetVar="ficheTable"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
-						rowsPerPageTemplate="5,10,15" >
+						rowsPerPageTemplate="5,10,15">
+
 						<f:facet name="header">
 							<p:outputPanel>
 								<h:outputText value="Search   " />
 								<p:inputText id="globalFilter" onkeyup="ficheTable.filter()"
-									style="width:150px" ></p:inputText>
+									style="width:150px"></p:inputText>
 							</p:outputPanel>
 						</f:facet>
-<!-- 						<f:facet name="header"> -->
-<!-- 							<h:outputText value="ALl AGENTS" /> -->
-<!-- 						</f:facet> -->
 
 
- <!-- <p:column filterBy="#{ag.firstName}" filterMatchMode="contains"> -->
-						<p:column> 
+						<p:column>
 							<f:facet name="header">
 								<h:outputText value="first Name" />
 							</f:facet>
 							<h:outputText value="#{ag.firstName}" />
 						</p:column>
+
+
 						<p:column>
 							<f:facet name="header">
 								<h:outputText value="last Name" />
 							</f:facet>
 							<h:outputText value="#{ag.lastName}" />
 						</p:column>
+
 						<p:column>
 							<f:facet name="header">
 								<h:outputText value="login" />
 							</f:facet>
 							<h:outputText value="#{ag.login}" />
 						</p:column>
+
 						<p:column>
 							<f:facet name="header">
 								<h:outputText value="password" />
 							</f:facet>
 							<h:outputText value="#{ag.pwd}" />
 						</p:column>
+
 						<p:column>
 							<f:facet name="header">
 								<h:outputText value="Email" />
@@ -67,83 +69,184 @@
 							<h:outputText value="#{ag.email}" />
 						</p:column>
 
+
+						<!--     <f:facet name="footer">  
+            <p:commandButton id="UpdateButton" value="Update"  oncomplete="PF('agentUpdate').show()"/>  
+            <p:commandButton id="DeleteButton" value="Delete"  oncomplete="PF('agentUpdate').show()"/>
+              </f:facet>  -->
+
 						<p:column>
-							<p:commandButton value="delete" 
-								action="#{administratrBean.formDisplayDelete()}" ajax="false"
-								styleClass="btn btn-success">
-								<f:setPropertyActionListener target="#{administratrBean.agent}"
-									value="#{ag}"></f:setPropertyActionListener>
+							<p:commandButton id="selectButton"
+								oncomplete="PF('agentUpdate').show()" value="Update" icon="ui-icon-pencil"
+								update=":nono:panel">
+								<f:setPropertyActionListener value="#{ag}"
+									target="#{administratrBean.agent}" />
 							</p:commandButton>
 						</p:column>
 
+
 						<p:column>
-							<p:commandButton value="update" ajax="false"
-								action="#{administratrBean.formDisplayUpdate()}"
-								styleClass="btn btn-success" >
-								<f:setPropertyActionListener target="#{administratrBean.agent}"
-									value="#{ag}"></f:setPropertyActionListener>
+							<p:commandButton id="selectButton2"
+								oncomplete="PF('agentDelete').show()" value="Delete" icon="ui-icon-circlesmall-close"
+								update=":momo:panel2">
+								<f:setPropertyActionListener value="#{ag}"
+									target="#{administratrBean.agent}" />
 							</p:commandButton>
 						</p:column>
-
 
 					</p:dataTable>
 
-					<p:commandButton value="NEW"
-						actionListener="#{administratrBean.formDisplayAdd()}" ajax="false"
-						styleClass="btn btn-success" />
+
+					<p:commandButton id="showDialogButton" type="button" value="New"
+						onclick="PF('agentAdd').show()" icon="ui-icon-arrowreturn-1-n"/>
 
 				</h:form>
 
-				<br></br>
-				<br></br>
-
-				<h:form id="agentAdd" rendered="#{administratrBean.bool}">
-					<p:panelGrid columns="3">
-
-						<h:outputLabel value="First Name" />
-						<p:inputText value="#{administratrBean.agent.firstName}" id="z1" required="true" requiredMessage="first name is required"/>
-						<h:message for="z1" />
 
 
-						<h:outputLabel value="Last Name" />
-						<p:inputText value="#{administratrBean.agent.lastName}" id="z2" requiredMessage="last name is required" required="true"/>
-						<h:message for="e2" />
 
 
-						<h:outputLabel value="Login" />
-						<p:inputText value="#{administratrBean.agent.login}" id="z3" requiredMessage="login is required"  required="true"/>
-						<h:message for="z3" />
 
 
-						<h:outputLabel value="Password" />
-						<p:password value="#{administratrBean.agent.pwd}" id="z4" requiredMessage="password is required" required="true"/>
-						<h:message for="z4" />
 
 
-						<h:outputLabel value="Email" />
-						<p:inputText value="#{administratrBean.agent.email}" id="z5" requiredMessage="email is required" required="true"/>
-						<h:message for="z5" />
-					</p:panelGrid>
 
-					<p:panelGrid columns="3">
-						<p:commandButton value="Add Agent"
-							action="#{administratrBean.doAddAgent()}"
-							rendered="#{administratrBean.boolAdd}" ajax="true" update=":table">
-							<p:confirm header="Confirmation" message="Are you  sure ?" />
-							 </p:commandButton>
-						<p:commandButton value="delete Agent"
-							action="#{administratrBean.doDeleteAgent()}"
-							rendered="#{administratrBean.boolDelete}" ajax="true" update=":table">
-							<p:confirm header="Confirmation" message="Are you  sure ?" />
-							</p:commandButton>
-						<p:commandButton value="update Agent"
-							action="#{administratrBean.doUpdate()}"
-							rendered="#{administratrBean.boolUpdate}" ajax="true" update=":table">
-							<p:confirm header="Confirmation" message="Are you  sure ?" />
-							</p:commandButton>
-					</p:panelGrid>
-				</h:form>
 
+
+
+
+				<p:dialog header="Enter new agent" widgetVar="agentAdd"
+					resizable="false" modal="true">
+					<h:form id="bb">
+						<h:panelGrid columns="4" id="panel3">
+
+							<p:outputLabel value="First Name"></p:outputLabel>
+							<p:inputText value="#{administratrBean.agent.firstName}" id="z1" required="true" requiredMessage="First name should not be empty !"></p:inputText>
+							<p:message for="z1" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Last Name"></p:outputLabel>
+							<p:inputText value="#{administratrBean.agent.lastName}" id="z2" required="true" requiredMessage="Last name should not be empty !"></p:inputText>
+							<p:message for="z2" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Login"></p:outputLabel>
+							<p:inputText value="#{administratrBean.agent.login}" id="z3" required="true" requiredMessage="Login should not be empty !"></p:inputText>
+							<p:message for="z3" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Password"></p:outputLabel>
+							<p:password value="#{administratrBean.agent.pwd}" id="z4" required="true" requiredMessage="Password should not empty !"> </p:password>
+							<p:message for="z4" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Email"></p:outputLabel>
+							<p:inputText value="#{administratrBean.agent.email}" id="z5" required="true" requiredMessage="Email  should not be empty !"></p:inputText>
+							<p:message for="z5" />
+							<h:outputText value="" />
+
+							<p:commandButton value="Add Agent"
+								actionListener="#{administratrBean.doAddAgent()}"
+								update="@form,:table,panel3"
+								oncomplete="if(!args.validationFailed)#{administratrBean.hideAddAgentDialog()}"
+								icon="ui-icon-check" validateClient="true"
+								><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+
+						</h:panelGrid>
+
+					</h:form>
+				</p:dialog>
+
+
+
+
+				<p:dialog header="Update existing agent" widgetVar="agentUpdate"
+					resizable="false" modal="true">
+					<h:form id="nono">
+						<h:panelGrid columns="4" id="panel">
+
+							<p:outputLabel value="First Name" for="z1" />
+							<p:inputText value="#{administratrBean.agent.firstName}" id="z1"
+								required="true"
+								requiredMessage="First Name should not be empty !"
+								label="First Name"></p:inputText>
+							<p:message for="z1" />
+							<h:outputText value="" />
+
+
+							<p:outputLabel value="Last Name"></p:outputLabel>
+							<p:inputText value="#{administratrBean.agent.lastName}" id="z2" required="true" requiredMessage="last Name should not be empty !" ></p:inputText>
+							<p:message for="z2" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Login"></p:outputLabel>
+							<p:inputText value="#{administratrBean.agent.login}" id="z3" required="true" requiredMessage="Login  should not be empty !"> </p:inputText>
+							<p:message for="z3" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Password"></p:outputLabel>
+							<p:password value="#{administratrBean.agent.pwd}" id="z4" required="true" requiredMessage="Password should not be empty !"></p:password>
+							<p:message for="z4" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Email"></p:outputLabel>
+							<p:inputText value="#{administratrBean.agent.email}" id="z5" required="true" requiredMessage="Email should not be empty !"></p:inputText>
+							<p:message for="z5" />
+							<h:outputText value="" />
+
+							<p></p>
+							<p:commandButton value="Update Agent"
+								actionListener="#{administratrBean.doUpdate()}"
+								update=":table,panel"
+								oncomplete="if(!args.validationFailed) { PF('agentUpdate').hide();}"
+								icon="ui-icon-check" validateClient="true"><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+							<p></p>
+							<p></p>
+						</h:panelGrid>
+
+					</h:form>
+				</p:dialog>
+
+
+
+				<p:dialog header="Delete agent" widgetVar="agentDelete"
+					resizable="false" modal="true">
+					<h:form id="momo">
+						<h:panelGrid columns="3" id="panel2">
+
+							<p:outputLabel value="First Name"></p:outputLabel>
+							<p:inputText value="#{administratrBean.agent.firstName}" id="z1"
+								readonly="true"></p:inputText>
+							<p></p>
+
+							<p:outputLabel value="Last Name"></p:outputLabel>
+							<p:inputText value="#{administratrBean.agent.lastName}" id="z2"
+								readonly="true"></p:inputText>
+							<p></p>
+
+							<p:outputLabel value="Login"></p:outputLabel>
+							<p:inputText value="#{administratrBean.agent.login}" id="z3"
+								readonly="true"></p:inputText>
+							<p></p>
+
+							<p:outputLabel value="Password"></p:outputLabel>
+							<p:password value="#{administratrBean.agent.pwd}" id="z4"
+								readonly="true"></p:password>
+							<p></p>
+
+							<p:outputLabel value="Email"></p:outputLabel>
+							<p:inputText value="#{administratrBean.agent.email}" id="z5"
+								readonly="true"></p:inputText>
+							<p></p>
+
+							<p:commandButton value="Delete Agent" icon="ui-icon-closethick"
+								actionListener="#{administratrBean.doDeleteAgent()}"
+								update=":table" oncomplete="PF('agentDelete').hide();"><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+
+						</h:panelGrid>
+
+					</h:form>
+				</p:dialog>
 
 
 
