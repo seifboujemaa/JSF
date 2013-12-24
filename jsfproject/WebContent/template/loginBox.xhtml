@@ -4,24 +4,30 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	 xmlns:p="http://primefaces.org/ui">
-	
+	   
 <f:loadBundle basename="#{languageBean.language}" var="msg"/>
 
 	<h:form id="form23" rendered="#{!authentificationBean.bool}">
-
+      
+         
+           
 		<ul>
 			<li>
 			
 				<h2>#{msg.register}</h2> <h:form>
 					<h:panelGrid columns="2">
+					
 						<h:outputText value="#{msg.login}" />
-						<p:inputText value="#{authentificationBean.user.login}"/>
+						<p:inputText value="#{authentificationBean.user.login}" required="true" requiredMessage="Login is required"/>
+						
 						<h:outputText value="#{msg.password}" />
-						<p:password value="#{authentificationBean.user.pwd}" />
-						<p></p>
+						<p:password value="#{authentificationBean.user.pwd}" required="true" requiredMessage="Password is required"/>
+						<p:growl id="growl" showDetail="true" sticky="true" />
+						
 						<p:commandButton action="#{authentificationBean.doLogin()}"
-							value="#{msg.connexion}" id="loginSubmit" />
-						<!-- 	<h:message for="loginSubmit"/> -->
+							value="#{msg.connexion}" id="loginSubmit"  update="growl" />
+						
+						 
 					</h:panelGrid>
 					<p:commandLink action="/register?faces-redirect=true"
 						value="#{msg.register}" />   #{msg.if_you_dont_have}

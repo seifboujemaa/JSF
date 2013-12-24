@@ -22,15 +22,21 @@
 						rendered="#{not empty administratrBean.agents}" paginator="true"
 						rows="10" widgetVar="ficheTable"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
-						rowsPerPageTemplate="5,10,15">
+						rowsPerPageTemplate="5,10,15" >
 
-						<f:facet name="header">
+					<!-- 	<f:facet name="header">
 							<p:outputPanel>
 								<h:outputText value="Search   " />
 								<p:inputText id="globalFilter" onkeyup="ficheTable.filter()"
 									style="width:150px"></p:inputText>
 							</p:outputPanel>
-						</f:facet>
+						</f:facet> -->
+						
+				     <f:facet name="header">  
+                             <p:outputPanel>  
+                                <h:outputText value="All Agents" />  
+                              </p:outputPanel>  
+                     </f:facet> 
 
 
 						<p:column>
