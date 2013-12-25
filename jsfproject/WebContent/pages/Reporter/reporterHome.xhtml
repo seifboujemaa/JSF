@@ -1,15 +1,227 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      template="/template/template.xhtml"
-      xmlns:p="http://primefaces.org/ui"> 
-      
-      <ui:define name="titlecontent"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titlecontent"> 
 Reporter Home
 </ui:define>
-<ui:define name="content2"></ui:define>
+	<ui:define name="content2">
+
+
+		<div id="content">
+			<div class="post">
+				<h2 class="title">Image Upload</h2>
+				<br></br>
+				<h:form id="table">
+					<p:dataTable value="#{fileUploadController.photos}" var="p"
+						rendered="#{not empty fileUploadController.photos}"
+						paginator="true" rows="10" widgetVar="ficheTable"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
+						rowsPerPageTemplate="5,10,15">
+
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="All photos" />
+							</p:outputPanel>
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="ID" />
+							</f:facet>
+							<h:outputText value="#{p.idPhoto}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Description" />
+							</f:facet>
+							<h:outputText value="#{p.description}" />
+						</p:column>
+
+
+
+
+
+
+
+						<p:column>
+							<p:commandButton id="selectButton"
+								oncomplete="PF('photoDelete').show()" value="Delete"
+								icon="ui-icon-closethick">
+								<f:setPropertyActionListener value="#{p}"
+									target="#{fileUploadController.photo}" />
+							</p:commandButton>
+						</p:column>
+
+
+
+					</p:dataTable>
+					<br></br>
+					<br></br>
+				</h:form>
+
+				<p:dialog header="Delete photo" widgetVar="photoDelete"
+					resizable="false" modal="true">
+					<h:form id="momo">
+						<h:panelGrid columns="1" id="panel2">
+							<h:outputText value="Delete this  photo !" />
+							<p></p>
+							<p:commandButton value="Delete"
+								oncomplete="PF('photoDelete').hide();" update=":table,@form"
+								actionListener="#{fileUploadController.doDeletePhoto()}">
+								<p:confirm header="Confirmation" message="Are you  sure ?" />
+							</p:commandButton>
+						</h:panelGrid>
+					</h:form>
+				</p:dialog>
+
+
+
+
+
+
+
+
+				<h:form id="form">
+
+					<p:fileUpload fileUploadListener="#{fileUploadController.upload}"
+						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="100000"
+						description="Select Images" />
+					<br></br>
+
+					<p:outputLabel value="Description :"></p:outputLabel>
+					<br></br>
+					<br></br>
+					<p:inputTextarea cols="100" rows="10"
+						value="#{fileUploadController.photo.description}"></p:inputTextarea>
+					<br></br>
+					<br></br>
+					<p:growl id="growl" showDetail="true" sticky="true" />
+					<p:commandButton value="Upload"
+						actionListener="#{fileUploadController.doAddPhoto()}"
+						update="growl,@form,:table"></p:commandButton>
+
+
+				</h:form>
+			</div>
+
+
+
+			<div class="post">
+				<h2 class="title">Video Upload</h2>
+				<br></br>
+
+				<h:form id="table2">
+					<p:dataTable value="#{videoBean.videos}" var="v"
+						rendered="#{not empty videoBean.videos}"
+						paginator="true" rows="10" widgetVar="ficheTable"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
+						rowsPerPageTemplate="5,10,15">
+
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="All videos" />
+							</p:outputPanel>
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="ID" />
+							</f:facet>
+							<h:outputText value="#{v.idVideo}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Description" />
+							</f:facet>
+							<h:outputText value="#{v.description}" />
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="URL" />
+							</f:facet>
+							<h:outputText value="#{v.url}" />
+						</p:column>
+
+
+
+
+
+
+
+						<p:column>
+							<p:commandButton id="selectButton"
+								oncomplete="PF('videoDelete').show()" value="Delete"
+								icon="ui-icon-closethick">
+								<f:setPropertyActionListener value="#{v}"
+									target="#{videoBean.video}" />
+							</p:commandButton>
+						</p:column>
+
+
+
+					</p:dataTable>
+					<br></br>
+					<br></br>
+				</h:form>
+
+				<p:dialog header="Delete Video" widgetVar="videoDelete"
+					resizable="false" modal="true">
+					<h:form id="momo2">
+						<h:panelGrid columns="1" id="panel2">
+							<h:outputText value="Delete this  video !" />
+							<p></p>
+							<p:commandButton value="Delete"
+								oncomplete="PF('videoDelete').hide();" update=":table2,@form"
+								actionListener="#{videoBean.doDeleteVideo()}">
+								<p:confirm header="Confirmation" message="Are you  sure ?" />
+							</p:commandButton>
+						</h:panelGrid>
+					</h:form>
+				</p:dialog>
+
+
+
+
+				<br></br>
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputText value="insert your video URL here" />
+						<p:inputText value="#{videoBean.video.url}"></p:inputText>
+
+						<h:outputText value="Description" />
+						<p:inputTextarea value="#{videoBean.video.description}" cols="73"
+							rows="10"></p:inputTextarea>
+
+						<p:growl id="growl2" showDetail="true" sticky="true" />
+						<p:commandButton value="Add video "
+							actionListener="#{videoBean.doAddVideo()}" update="growl2,@form,:table2"></p:commandButton>
+
+					</h:panelGrid>
+
+				</h:form>
+
+
+
+			</div>
+
+
+
+
+		</div>
+	</ui:define>
 
 
 
