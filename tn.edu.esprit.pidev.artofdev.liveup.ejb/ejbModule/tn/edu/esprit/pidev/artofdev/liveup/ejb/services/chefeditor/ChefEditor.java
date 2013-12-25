@@ -46,6 +46,7 @@ public class ChefEditor implements ChefEditorRemote, ChefEditorLocal {
 
 	@Override
 	public void acceptFreeLance(FreeLance freeLance) {
+		freeLance.setStatus(true);
 		em.merge(freeLance);
 		
 	}
@@ -83,7 +84,8 @@ public class ChefEditor implements ChefEditorRemote, ChefEditorLocal {
 	}
 
 	@Override
-	public void appointArticle(Article article) {
+	public void appointArticle(Article  article) {
+		article.setStatus(true);
 		em.merge(article);
 		
 	}

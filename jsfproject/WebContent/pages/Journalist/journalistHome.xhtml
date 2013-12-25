@@ -1,15 +1,243 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      template="/template/template.xhtml">
-      
-      <ui:define name="titlecontent"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titlecontent"> 
 Journalist Home
 </ui:define>
-<ui:define name="content2"></ui:define> 
+	<ui:define name="content2">
+	
+	
+	<div id="content">
+			<div class="post">
+				<h2 class="title">Manage My Articles</h2>
+				<br></br>
 
- 
+
+				<h:form id="table">
+					<p:dataTable value="#{articleBean.articlesJournalist}" var="a"
+						rendered="#{not empty articleBean.articlesJournalist}" paginator="true"
+						rows="10" widgetVar="ficheTable"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
+						rowsPerPageTemplate="5,10,15" >
+
+					<!-- 	<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Search   " />
+								<p:inputText id="globalFilter" onkeyup="ficheTable.filter()"
+									style="width:150px"></p:inputText>
+							</p:outputPanel>
+						</f:facet> -->
+						
+				     <f:facet name="header">  
+                             <p:outputPanel>  
+                                <h:outputText value="My articles" />  
+                              </p:outputPanel>  
+                     </f:facet> 
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="date of release" />
+							</f:facet>
+							<h:outputText  value="#{a.day}" ></h:outputText>
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Status" />
+							</f:facet>
+							<h:outputText value="#{a.status}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Title" />
+							</f:facet>
+							<h:outputText value="#{a.title}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Paragraph" />
+							</f:facet>
+							<h:outputText value="#{a.paragraph}" />
+						</p:column>
+
+						
+
+
+						<!--     <f:facet name="footer">  
+            <p:commandButton id="UpdateButton" value="Update"  oncomplete="PF('agentUpdate').show()"/>  
+            <p:commandButton id="DeleteButton" value="Delete"  oncomplete="PF('agentUpdate').show()"/>
+              </f:facet>  -->
+
+						<p:column>
+							<p:commandButton id="selectButton"
+								oncomplete="PF('articleUpdate').show()" value="Update" icon="ui-icon-pencil"
+								update=":nono:panel">
+								<f:setPropertyActionListener value="#{a}"
+									target="#{articleBean.article}" />
+							</p:commandButton>
+						</p:column>
+
+
+						<p:column>
+							<p:commandButton id="selectButton2"
+								oncomplete="PF('articleDelete').show()" value="Delete" icon="ui-icon-circlesmall-close"
+								update=":momo:panel2">
+								<f:setPropertyActionListener value="#{a}"
+									target="#{articleBean.article}" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+
+
+					<p:commandButton id="showDialogButton" type="button" value="New"
+						onclick="PF('articleAdd').show()" icon="ui-icon-arrowreturn-1-n"/>
+
+				</h:form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<p:dialog header="Enter new article" widgetVar="articleAdd"
+					resizable="false" modal="true">
+					<h:form id="bb">
+						<h:panelGrid columns="4" id="panel3">
+
+							<p:outputLabel value="release date"></p:outputLabel>
+							<p:calendar value="#{articleBean.article.day}" id="z1" required="true" requiredMessage="date should not be empty !"></p:calendar>
+							<p:message for="z1" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="title"></p:outputLabel>
+							<p:inputText value="#{articleBean.article.title}" id="z2" required="true" requiredMessage="title should not be empty !"></p:inputText>
+							<p:message for="z2" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Paragraph"></p:outputLabel>
+							<p:inputTextarea value="#{articleBean.article.paragraph}" id="z3" required="true" requiredMessage="paragraph should not be empty !"></p:inputTextarea>
+							<p:message for="z3" />
+							<h:outputText value="" />
+
+							
+
+							<p:commandButton value="Add Article"
+								actionListener="#{articleBean.doAddArticleJournalist()}"
+								update="@form,:table,panel3"
+								oncomplete="if(!args.validationFailed)#{articleBean.HideAddArticleDialog()}"
+								icon="ui-icon-check" validateClient="true"
+								><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+
+						</h:panelGrid>
+
+					</h:form>
+				</p:dialog>
+
+
+
+
+				<p:dialog header="Update existing article" widgetVar="articleUpdate"
+					resizable="false" modal="true">
+					<h:form id="nono">
+						<h:panelGrid columns="4" id="panel">
+
+							<p:outputLabel value="Release date" for="z1" />
+							<p:inputText value="#{articleBean.article.day}" id="z1"
+								required="true"
+								requiredMessage="date should not be empty !"
+								></p:inputText>
+							<p:message for="z1" />
+							<h:outputText value="" />
+
+
+							<p:outputLabel value="Title"></p:outputLabel>
+							<p:inputText value="#{articleBean.article.title}" id="z2" required="true" requiredMessage="Title should not be empty !" ></p:inputText>
+							<p:message for="z2" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Paragraph"></p:outputLabel>
+							<p:inputTextarea value="#{articleBean.article.paragraph}" id="z3" required="true" requiredMessage="Paragraph  should not be empty !"> </p:inputTextarea>
+							<p:message for="z3" />
+							<h:outputText value="" />
+
+							
+
+							<p></p>
+							<p:commandButton value="Update Article"
+								actionListener="#{articleBean.doUpdateArticleJournalist()}"
+								update=":table,panel"
+								oncomplete="if(!args.validationFailed) { PF('articleUpdate').hide();}"
+								icon="ui-icon-check" validateClient="true"><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+							<p></p>
+							<p></p>
+						</h:panelGrid>
+
+					</h:form>
+				</p:dialog>
+
+
+
+				<p:dialog header="Delete article" widgetVar="articleDelete"
+					resizable="false" modal="true">
+					<h:form id="momo">
+						<h:panelGrid columns="3" id="panel2">
+
+							<p:outputLabel value="Release date"></p:outputLabel>
+							<p:inputText value="#{articleBean.article.day}" id="z1"
+								readonly="true"></p:inputText>
+							<p></p>
+
+							<p:outputLabel value="Title"></p:outputLabel>
+							<p:inputText value="#{articleBean.article.title}" id="z2"
+								readonly="true"></p:inputText>
+							<p></p>
+
+							<p:outputLabel value="Paragraph"></p:outputLabel>
+							<p:inputTextarea value="#{articleBean.article.paragraph}" id="z3"
+								readonly="true"></p:inputTextarea>
+							<p></p>
+
+					
+
+							<p:commandButton value="Delete Article" icon="ui-icon-closethick"
+								actionListener="#{articleBean.doDeleteArticleJournalist()}"
+								update=":table" oncomplete="PF('articleDelete').hide();"><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+
+						</h:panelGrid>
+
+					</h:form>
+				</p:dialog>
+
+
+
+
+			</div>
+		</div>
+	
+	
+	
+	
+	
+	
+	
+	</ui:define>
 
 </ui:composition>

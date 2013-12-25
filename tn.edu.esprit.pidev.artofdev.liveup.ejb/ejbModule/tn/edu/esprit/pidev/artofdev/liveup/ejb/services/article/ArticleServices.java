@@ -48,9 +48,84 @@ public ArticleServices(){
 
 	@Override
 	public List<Article> findAllArticle() {
-		Query query=entityManager.createQuery("select b from Article b");
+		Query query=entityManager.createQuery("select b from Article b where b.status = true");
 		return query.getResultList();
 	}
+
+
+
+	@Override
+	public void addArtilceByTypeJournalistAndStatus(Article article) {
+		article.setType("Journalist");
+		article.setStatus(false);
+		entityManager.persist(article);
+		
+		
+	}
+
+
+
+	@Override
+	public void addArticleByTypeFreeLanceAndStatus(Article article) {
+	  article.setType("FreeLance");
+	  article.setStatus(false);
+	  entityManager.persist(article);
+	  
+		
+	}
+
+
+
+	@Override
+	public List<Article> findAllArticleByTypeJournalist() {
+		Query query=entityManager.createQuery("select b from Article b where b.type = 'Journalist' ");
+		return query.getResultList();
+	}
+
+
+
+	@Override
+	public List<Article> findAllArticleByTypeFreeLance() {
+		Query query=entityManager.createQuery("select b from Article b where b.type = 'FreeLance'");
+		return query.getResultList();
+	}
+
+
+
+	@Override
+	public List<Article> findAllArticleWithoutCriter() {
+		Query query=entityManager.createQuery("select b from Article b ");
+		return query.getResultList();
+	}
+
+
+
+	@Override
+	public void appointArticle(Article article) {
+		article.setStatus(true);
+    	entityManager.merge(article);
+		
+	}
+
+
+
+	@Override
+	public void declineArticle(Article article) {
+		entityManager.remove(entityManager.merge(article));
+		
+	}
+	
+	
+//	public void appointArticle(Article  article) {
+//		article.setStatus(true);
+//		entityManager.merge(article);
+//		
+//	}
+//	
+//	public void declineArticle(Article article) {
+//		entityManager.remove(entityManager.merge(article));
+//		
+//	}
 	
 
 }

@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @Entity
-@XmlRootElement
 public class Article implements Serializable {
 
 	
@@ -19,7 +18,8 @@ public class Article implements Serializable {
 	private String paragraph;
 	private String day;
 	private String type;
-	private Boolean status;
+	private boolean status;
+	
 	
 	private FreeLance freeLance;
 	private Journalist journalist;
@@ -82,14 +82,15 @@ public class Article implements Serializable {
 	public void setJournalist(Journalist journalist) {
 		this.journalist = journalist;
 	}
-	
 	public boolean isStatus() {
 		return status;
 	}
-	
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	
+	
+	
 	
 	
 	

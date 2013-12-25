@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml" xmlns:p="http://primefaces.org/ui">
+
+
+
+	<ui:define name="titlecontent">Free lance management</ui:define>
+
+	<ui:define name="content2">
+
+		<div id="content">
+			<div class="post">
+				<h2 class="title">Free lance Administration zone</h2>
+				<br></br>
+
+
+				<h:form id="table">
+					<p:dataTable value="#{chefEditorBean.freeLances}" var="f"
+						rendered="#{not empty chefEditorBean.freeLances}" paginator="true"
+						rows="10" widgetVar="ficheTable"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
+						rowsPerPageTemplate="5,10,15" >
+
+					<!-- 	<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Search   " />
+								<p:inputText id="globalFilter" onkeyup="ficheTable.filter()"
+									style="width:150px"></p:inputText>
+							</p:outputPanel>
+						</f:facet> -->
+						
+				     <f:facet name="header">  
+                             <p:outputPanel>  
+                                <h:outputText value="All FreeLances" />  
+                              </p:outputPanel>  
+                     </f:facet> 
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first Name" />
+							</f:facet>
+							<h:outputText value="#{f.firstName}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="last Name" />
+							</f:facet>
+							<h:outputText value="#{f.lastName}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="login" />
+							</f:facet>
+							<h:outputText value="#{f.login}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="password" />
+							</f:facet>
+							<h:outputText value="#{f.pwd}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Email" />
+							</f:facet>
+							<h:outputText value="#{f.email}" />
+						</p:column>
+						
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Status" />
+							</f:facet>
+							<h:outputText value="#{f.status}" />
+						</p:column>
+
+
+						<!--     <f:facet name="footer">  
+            <p:commandButton id="UpdateButton" value="Update"  oncomplete="PF('agentUpdate').show()"/>  
+            <p:commandButton id="DeleteButton" value="Delete"  oncomplete="PF('agentUpdate').show()"/>
+              </f:facet>  -->
+
+						<p:column>
+							<p:commandButton id="selectButton"
+								oncomplete="PF('view').show()" value="View" icon="ui-icon-zoom"
+								update=":bb:panel3">
+								<f:setPropertyActionListener value="#{f}"
+									target="#{chefEditorBean.freeLance}" />
+							</p:commandButton>
+						</p:column>
+
+
+						
+
+					</p:dataTable>
+
+
+					
+
+				</h:form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<p:dialog header="Free lance discreption" widgetVar="view"
+					resizable="false" modal="true">
+					<h:form id="bb">
+						<h:panelGrid columns="4" id="panel3">
+
+							<p:outputLabel value="First Name"></p:outputLabel>
+							<p:inputText value="#{chefEditorBean.freeLance.firstName}" id="z1" required="true" requiredMessage="First name should not be empty !" readonly="true"></p:inputText>
+							<p:message for="z1" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Last Name"></p:outputLabel>
+							<p:inputText value="#{chefEditorBean.freeLance.lastName}" id="z2" required="true" requiredMessage="Last name should not be empty !" readonly="true"></p:inputText>
+							<p:message for="z2" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Login"></p:outputLabel>
+							<p:inputText value="#{chefEditorBean.freeLance.login}" id="z3" required="true" requiredMessage="Login should not be empty !" readonly="true"></p:inputText>
+							<p:message for="z3" />
+							<h:outputText value="" />
+
+						
+
+							<p:outputLabel value="Email"></p:outputLabel>
+							<p:inputText value="#{chefEditorBean.freeLance.email}" id="z5" required="true" requiredMessage="Email  should not be empty !" readonly="true"></p:inputText>
+							<p:message for="z5" />
+							<h:outputText value="" />
+							
+							<p:outputLabel value="Status"></p:outputLabel>
+							<p:inputText value="#{chefEditorBean.freeLance.status}" id="z6" required="true" requiredMessage="Email  should not be empty !" readonly="true"></p:inputText>
+							<p:message for="z6" />
+							<h:outputText value="" />
+
+							<p:commandButton value="Appoint Freelancer"
+								actionListener="#{chefEditorBean.doAppointFreeLance()}"
+								update="@form,:table,panel3"
+								oncomplete="PF('view').hide();"
+								icon="ui-icon-check" validateClient="true"
+								><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+								
+								<p:commandButton value="Decline Freelancer"
+								actionListener="#{chefEditorBean.doDeclineFreeLance()}"
+								update="@form,:table,panel3"
+								oncomplete="PF('view').hide();"
+								icon="ui-icon-closethick" validateClient="true"
+								><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+
+						</h:panelGrid>
+
+					</h:form>
+				</p:dialog>
+
+
+
+
+				
+
+
+
+			</div>
+		</div>
+
+
+	</ui:define>
+
+
+
+</ui:composition>

@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/template.xhtml">
+	template="/template/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
 
 
 	<ui:define name="titlecontent">Welcome</ui:define>
@@ -33,44 +34,52 @@
 		
 		
 		
-		
+		<!-- <f:converter converterId="firstNameConverter" />  la mettre dans une button  afin  de faire une validation personalisé-->
 		
 		
 		
 			<div class="post">
-				<h2 class="title">Registration</h2>
+				<h2 class="title">Registration as FreeLancer</h2>
 
 				<div class="entry">
 					<h:form id="name">
-						
-						<h:panelGrid columns="3">
-							<h:outputLabel value="first Name" for="a1" />
-							<h:inputText value="#{clientBean.firstName}" id="a1" >
-							<f:converter converterId="firstNameConverter" />
-							</h:inputText>
-							<h:message  for="a1"/>
-			
-							<h:outputLabel value="last Name" for="a2" />
-							<h:inputText value="#{clientBean.firstName}" required="true" id="a2" />
-							<h:message  for="a2"/>
-							
-							<h:outputLabel value="Login" for="a3" />
-							<h:inputText value="null" id="a3" />
-							<h:message  for="a3"/>
-							
-							<h:outputLabel value="Password" for="a4" />
-							<h:inputSecret value="null" id="a4" />
-							<h:message  for="a4"/>
-							
-							<h:outputLabel value="Email" for="a5" />
-							<h:inputText value="null" id="a5" />
-							<h:message  for="a5"/>
-							<p></p>
-							<h:commandButton action="#{clientBean.DoRegister()}"
-								value="Confirm">
-								
-							</h:commandButton>
+				
+						<h:panelGrid columns="4" id="panel3">
+
+							<p:outputLabel value="First Name"></p:outputLabel>
+							<p:inputText value="#{freeLanceBean.freelance.firstName}" id="z1" required="true" requiredMessage="First name should not be empty !"></p:inputText>
+							<p:message for="z1" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Last Name"></p:outputLabel>
+							<p:inputText value="#{freeLanceBean.freelance.lastName}" id="z2" required="true" requiredMessage="Last name should not be empty !"></p:inputText>
+							<p:message for="z2" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Login"></p:outputLabel>
+							<p:inputText value="#{freeLanceBean.freelance.login}" id="z3" required="true" requiredMessage="Login should not be empty !"></p:inputText>
+							<p:message for="z3" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Password"></p:outputLabel>
+							<p:password value="#{freeLanceBean.freelance.pwd}" id="z4" required="true" requiredMessage="Password should not empty !"> </p:password>
+							<p:message for="z4" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Email"></p:outputLabel>
+							<p:inputText value="#{freeLanceBean.freelance.email}" id="z5" required="true" requiredMessage="Email  should not be empty !"></p:inputText>
+							<p:message for="z5" />
+							<h:outputText value="" />
+
+                              <p:growl id="growl" showDetail="true" sticky="true" />
+							<p:commandButton value="Join us" 
+								actionListener="#{freeLanceBean.doAddFreeLancer()}"
+								update="@form,growl"
+								icon="ui-icon-check" 
+								><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+
 						</h:panelGrid>
+
 					</h:form>
 				</div>
 			</div>

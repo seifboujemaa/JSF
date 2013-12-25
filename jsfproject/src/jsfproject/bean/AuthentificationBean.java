@@ -1,6 +1,8 @@
 package jsfproject.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -17,6 +19,7 @@ import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.Journalist;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.Reporter;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.SubscribedClient;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.User;
+import tn.edu.esprit.pidev.artofdev.liveup.ejb.services.freelance.FreelanceLocal;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.services.user.UserServicesLocal;
 
 @ManagedBean
@@ -39,8 +42,48 @@ public class AuthentificationBean implements Serializable {
 	private boolean boolFreeLance;
 	@EJB
 	private UserServicesLocal userLocal;
+	@EJB
+	private FreelanceLocal localFreelanceLocal;
+
+	private FreeLance freeLance = new FreeLance();
+
+	private List<FreeLance> freeLances = new ArrayList<FreeLance>();
+
 	private User user = new User();
+	private User user2 = new User();
 	private String userType;
+
+	public User getUser2() {
+		return user2;
+	}
+
+	public void setUser2(User user2) {
+		this.user2 = user2;
+	}
+
+	public FreelanceLocal getLocalFreelanceLocal() {
+		return localFreelanceLocal;
+	}
+
+	public void setLocalFreelanceLocal(FreelanceLocal localFreelanceLocal) {
+		this.localFreelanceLocal = localFreelanceLocal;
+	}
+
+	public FreeLance getFreeLance() {
+		return freeLance;
+	}
+
+	public void setFreeLance(FreeLance freeLance) {
+		this.freeLance = freeLance;
+	}
+
+	public List<FreeLance> getFreeLances() {
+		return freeLances;
+	}
+
+	public void setFreeLances(List<FreeLance> freeLances) {
+		this.freeLances = freeLances;
+	}
 
 	public boolean isBoolAdministrator() {
 		return boolAdministrator;
@@ -182,7 +225,7 @@ public class AuthentificationBean implements Serializable {
 
 		boolAdministrator = false;
 		String nav = null;
-		//FacesMessage msg = null; 
+		// FacesMessage msg = null;
 		user = userLocal.loginJSF(user.getLogin(), user.getPwd());
 		if (user != null) {
 			bool = true;
@@ -211,23 +254,41 @@ public class AuthentificationBean implements Serializable {
 				boolJournalist = true;
 				nav = "/pages/Journalist/journalistHome?faces-redirect=true";
 			}
-			if (user instanceof FreeLance) {
-				userType = "FreeLance";
-				boolFreeLance = true;
-				nav = "/pages/FreeLance/freeLanceHome?faces-redirect=true";
-			}
+
 			if (user instanceof Agent) {
 				userType = "Agent";
 				boolAgent = true;
 				nav = "/pages/Agent/agentHome?faces-redirect=true";
 			}
 
-		} else {
-			//msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");
-			//return "register?faces-redirect=true";
-			
+			if (user instanceof FreeLance) {
+				user2 = userLocal
+						.loginFreeLance(user.getLogin(), user.getPwd());
+				if (user2 != null) {
+					userType = "FreeLance";
+					boolFreeLance = true;
+					nav = "/pages/FreeLance/freeLanceHome?faces-redirect=true";
+				}
+				if (user2 == null) {
+					
+					
+
+					FacesMessage msg = new FacesMessage(
+							FacesMessage.SEVERITY_WARN, "Oups",
+							"You still on the waiting list! please , be patient ...");
+					FacesContext.getCurrentInstance().addMessage(null, msg);
+					return null;
+
+				}
+
+			}
+
+		}
+
+		else {
+
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Erreur ","Invalid Credentials");
+					"Error ", "Invalid Credentials");
 
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return null;
@@ -245,6 +306,15 @@ public class AuthentificationBean implements Serializable {
 				.clear();
 		return "/register?faces-redirect=true";
 
+	}
+
+	public String doUpdateFreeLanceMyData() {
+
+		localFreelanceLocal.updateFreelance((FreeLance) user);
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Success", "Your informations had been changed !");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		return null;
 	}
 
 }

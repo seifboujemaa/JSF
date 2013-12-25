@@ -4,12 +4,23 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       template="/template/template.xhtml"> 
-      
-      <ui:define name="titlecontent"> 
-      Chef Editor Home
+
+<ui:define name="titlecontent"> 
+Chef Editor Home
 </ui:define>
-<ui:define name="content2"></ui:define>
-
-
-
+<ui:define name="content2">
+<div id="content">
+			<div class="post">
+				<h2 class="title">Please, choose an  action to do </h2>
+<h:form>
+<br></br><br></br>
+<ul>
+<li><h:commandLink action="manageArticles?faces-redirect=true" value="Manage Articles" /></li><br></br>
+<li><h:commandLink action="ManageJournalist?faces-redirect=true" value="Manage Journalist" /></li><br></br>
+<li><h:commandLink action="ManageFreeLance?faces-redirect=true" value="Manage FreeLance" /></li><br></br>
+</ul>
+</h:form>
+</div>
+</div>
+</ui:define>
 </ui:composition>

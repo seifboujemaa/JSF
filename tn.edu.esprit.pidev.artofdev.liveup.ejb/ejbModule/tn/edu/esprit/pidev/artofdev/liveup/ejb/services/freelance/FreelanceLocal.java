@@ -27,5 +27,8 @@ public interface FreelanceLocal {
 	public void modifyNews(News news);
 	public void deleteArticle(Article article);
 	public void deleteNews(News news);
+	
+	public List<FreeLance> AllFreeLancesJSF();
+	public void addFreeLance(FreeLance freeLance);
 
 }

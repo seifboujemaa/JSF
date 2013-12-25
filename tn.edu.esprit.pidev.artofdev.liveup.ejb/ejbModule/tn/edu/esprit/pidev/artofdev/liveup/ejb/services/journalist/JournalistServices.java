@@ -56,4 +56,10 @@ public class JournalistServices implements JournalistServicesLocal,
 		return journalists;
 	}
 
+	@Override
+	public List<Journalist> findAllJournalistJSF() {
+		Query query=entityManager.createQuery("select e from Journalist e");
+		return query.getResultList();
+	}
+
 }

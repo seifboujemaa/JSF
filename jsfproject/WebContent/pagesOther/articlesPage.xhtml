@@ -20,7 +20,9 @@
 				
 				 <div class="entry">
         <h:outputText value="&lt;/div&gt;&lt;div style='float: left;'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
-        <div><h2 class="title">#{item.title} | #{item.day}</h2></div>
+        <div><h2 class="title">#{item.title}   </h2></div>
+        <div style="text-decoration: underline;">written by a "#{item.type}"  </div>
+        <div style="color: background;">#{item.day}</div>
         <br></br>
         <div>#{item.paragraph}</div>
         

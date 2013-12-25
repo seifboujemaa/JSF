@@ -19,6 +19,7 @@ public interface UserServicesLocal {
 	public User authentification(String login , String password);
 	public User authentificationCondition(String login , String password );
 	public User loginJSF (String login,String password);
+	public User loginFreeLance(String login ,  String password);
 	public List<User> findAllAgent();
 
 }

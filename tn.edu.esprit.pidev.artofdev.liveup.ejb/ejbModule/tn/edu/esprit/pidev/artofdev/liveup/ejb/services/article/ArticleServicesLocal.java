@@ -12,4 +12,15 @@ public interface ArticleServicesLocal {
 	public void deleteArticle(Article article);
 	public Article findArticleById(int idArticle);
 	public List<Article> findAllArticle();
+	
+	
+	public void addArtilceByTypeJournalistAndStatus(Article article);
+	public void addArticleByTypeFreeLanceAndStatus(Article article);
+	public List<Article> findAllArticleByTypeJournalist();
+	public List<Article> findAllArticleByTypeFreeLance();
+	public List<Article>  findAllArticleWithoutCriter();
+	public void appointArticle(Article  article);
+	public void declineArticle(Article article);
+	
+	
 }

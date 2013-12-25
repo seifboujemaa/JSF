@@ -130,4 +130,20 @@ EntityManager entityManager ;
 		return freelances;
 	}
 
+
+	@Override
+	public List<FreeLance> AllFreeLancesJSF() {
+		Query query=entityManager.createQuery("select a from FreeLance a ");
+		return query.getResultList();
+		
+	}
+
+
+	@Override
+	public void addFreeLance(FreeLance freeLance) {
+		freeLance.setStatus(false);
+		entityManager.persist(freeLance);
+		
+	}
+
 }

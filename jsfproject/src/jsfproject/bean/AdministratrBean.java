@@ -346,5 +346,17 @@ public class AdministratrBean implements Serializable {
 
 		return "PF('agentAdd').hide();";
 	}
+	
+	public String hideAddChefDialog() {
+		chefEditor = new ChefEditor();
+
+		return "PF('chefAdd').hide();";
+	}
+	
+	public String hideAddReporterDialog() {
+		reporter = new Reporter();
+
+		return "PF('reporterAdd').hide();";
+	}
 
 }
