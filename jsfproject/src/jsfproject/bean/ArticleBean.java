@@ -102,60 +102,61 @@ public class ArticleBean implements Serializable{
 	public void init(){
 		
 		articles = localArticle.findAllArticle();
-		articlesFreeLance = localArticle.findAllArticleByTypeFreeLance();
-		articlesJournalist = localArticle.findAllArticleByTypeJournalist();
+//		articlesFreeLance = localArticle.findAllArticleByTypeFreeLance();
+//		articlesJournalist = localArticle.findAllArticleByTypeJournalist();
 		articlesChefEditor = localArticle.findAllArticleWithoutCriter();
 		
 	}
 	
 	
-	public String doAddArticleJournalist(){
-		localArticle.addArtilceByTypeJournalistAndStatus(article);
-		article = new Article();
-		articlesJournalist = localArticle.findAllArticleByTypeJournalist();
-		return null;
-	}
-	
-	
-	
-	public String doUpdateArticleJournalist(){
-		localArticle.updateArticle(article);
-		article = new Article();
-		articlesJournalist = localArticle.findAllArticleByTypeJournalist();
-		
-		return null;
-	}
-	
-	public String doDeleteArticleJournalist(){
-		localArticle.deleteArticle(article);
-		article = new Article();
-		articlesJournalist = localArticle.findAllArticleByTypeJournalist();
-		
-		return null;
-	}
-	
-	public String doAddArticleFreeLance(){
-		localArticle.addArticleByTypeFreeLanceAndStatus(article);
-		article = new Article();
-		articlesFreeLance = localArticle.findAllArticleByTypeFreeLance();
-		return null;
-	}
-	
-	public String doUpdateArticleFreeLance(){
-		localArticle.updateArticle(article);
-		article = new Article();
-		articlesFreeLance = localArticle.findAllArticleByTypeFreeLance();
-		
-		return null;
-	}
-	
-	public String doDeleteArticleFreeLance(){
-		localArticle.deleteArticle(article);
-		article = new Article();
-		articlesFreeLance = localArticle.findAllArticleByTypeFreeLance();
-		
-		return null;
-	}
+//	public String doAddArticleJournalist(){
+//		localArticle.addArtilceByTypeJournalistAndStatus(article);
+//		article = new Article();
+//		articlesJournalist = localArticle.findAllArticleByTypeJournalist();
+//		return null;
+//	}
+//	
+//	
+//	
+//	public String doUpdateArticleJournalist(){
+//		localArticle.updateArticle(article);
+//		article = new Article();
+//		articlesJournalist = localArticle.findAllArticleByTypeJournalist();
+//		
+//		return null;
+//	}
+//	
+//	public String doDeleteArticleJournalist(){
+//		localArticle.deleteArticle(article);
+//		article = new Article();
+//		articlesJournalist = localArticle.findAllArticleByTypeJournalist();
+//		
+//		return null;
+//	}
+//	
+//	public String doAddArticleFreeLance(){
+//		
+//		localArticle.addArticleByTypeFreeLanceAndStatus(article);
+//		article = new Article();
+//		articlesFreeLance = localArticle.findAllArticleByTypeFreeLance();
+//		return null;
+//	}
+//	
+//	public String doUpdateArticleFreeLance(){
+//		localArticle.updateArticle(article);
+//		article = new Article();
+//		articlesFreeLance = localArticle.findAllArticleByTypeFreeLance();
+//		
+//		return null;
+//	}
+//	
+//	public String doDeleteArticleFreeLance(){
+//		localArticle.deleteArticle(article);
+//		article = new Article();
+//		articlesFreeLance = localArticle.findAllArticleByTypeFreeLance();
+//		
+//		return null;
+//	}
 	
 	public String HideAddArticleDialog(){
 		

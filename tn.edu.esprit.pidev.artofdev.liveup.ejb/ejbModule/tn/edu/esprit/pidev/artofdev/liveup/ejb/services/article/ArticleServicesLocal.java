@@ -16,8 +16,8 @@ public interface ArticleServicesLocal {
 	
 	public void addArtilceByTypeJournalistAndStatus(Article article);
 	public void addArticleByTypeFreeLanceAndStatus(Article article);
-	public List<Article> findAllArticleByTypeJournalist();
-	public List<Article> findAllArticleByTypeFreeLance();
+	public List<Article> findAllArticleByTypeJournalist(int id);
+	public List<Article> findAllArticleByTypeFreeLance(int id);
 	public List<Article>  findAllArticleWithoutCriter();
 	public void appointArticle(Article  article);
 	public void declineArticle(Article article);

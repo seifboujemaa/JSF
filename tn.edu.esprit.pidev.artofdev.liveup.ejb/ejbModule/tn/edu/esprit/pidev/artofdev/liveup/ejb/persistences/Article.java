@@ -19,6 +19,8 @@ public class Article implements Serializable {
 	private String day;
 	private String type;
 	private boolean status;
+	private int journalistIdd;
+	private int freelanceIdd;
 	
 	
 	private FreeLance freeLance;
@@ -88,6 +90,19 @@ public class Article implements Serializable {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	public int getJournalistIdd() {
+		return journalistIdd;
+	}
+	public void setJournalistIdd(int journalistIdd) {
+		this.journalistIdd = journalistIdd;
+	}
+	public int getFreelanceIdd() {
+		return freelanceIdd;
+	}
+	public void setFreelanceIdd(int freelanceIdd) {
+		this.freelanceIdd = freelanceIdd;
+	}
+	
 	
 	
 	

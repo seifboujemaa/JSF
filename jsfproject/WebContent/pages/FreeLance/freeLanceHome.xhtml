@@ -18,7 +18,7 @@ Free Lance Home
 				<div align="right"><p:commandButton value="Update my informations"  oncomplete="PF('update').show()" icon="ui-icon-pencil" /> </div>
 				<p:dialog header="My informations" widgetVar="update"
 					resizable="false" modal="true">
-					
+					#{authentificationBean.init()}
 					<h:form id="form">
 						<h:panelGrid columns="4" id="panel">
 						
@@ -63,8 +63,8 @@ Free Lance Home
 
 
 				<h:form id="table">
-					<p:dataTable value="#{articleBean.articlesFreeLance}" var="a"
-						rendered="#{not empty articleBean.articlesFreeLance}"
+					<p:dataTable value="#{authentificationBean.articlesFreeLance}" var="a"
+						rendered="#{not empty authentificationBean.articlesFreeLance}"
 						paginator="true" rows="10" widgetVar="ficheTable"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
 						rowsPerPageTemplate="5,10,15">
@@ -126,7 +126,7 @@ Free Lance Home
 								oncomplete="PF('articleUpdate').show()" value="Update"
 								icon="ui-icon-pencil" update=":nono:panel">
 								<f:setPropertyActionListener value="#{a}"
-									target="#{articleBean.article}" />
+									target="#{authentificationBean.article2}" />
 							</p:commandButton>
 						</p:column>
 
@@ -136,7 +136,7 @@ Free Lance Home
 								oncomplete="PF('articleDelete').show()" value="Delete"
 								icon="ui-icon-circlesmall-close" update=":momo:panel2">
 								<f:setPropertyActionListener value="#{a}"
-									target="#{articleBean.article}" />
+									target="#{authentificationBean.article2}" />
 							</p:commandButton>
 						</p:column>
 
@@ -167,19 +167,19 @@ Free Lance Home
 						<h:panelGrid columns="4" id="panel3">
 
 							<p:outputLabel value="release date"></p:outputLabel>
-							<p:calendar value="#{articleBean.article.day}" id="z1"
+							<p:calendar value="#{authentificationBean.article2.day}" id="z1"
 								required="true" requiredMessage="date should not be empty !"></p:calendar>
 							<p:message for="z1" />
 							<h:outputText value="" />
 
 							<p:outputLabel value="title"></p:outputLabel>
-							<p:inputText value="#{articleBean.article.title}" id="z2"
+							<p:inputText value="#{authentificationBean.article2.title}" id="z2"
 								required="true" requiredMessage="title should not be empty !"></p:inputText>
 							<p:message for="z2" />
 							<h:outputText value="" />
 
 							<p:outputLabel value="Paragraph"></p:outputLabel>
-							<p:inputTextarea value="#{articleBean.article.paragraph}" id="z3"
+							<p:inputTextarea value="#{authentificationBean.article2.paragraph}" id="z3"
 								required="true"
 								requiredMessage="paragraph should not be empty !"></p:inputTextarea>
 							<p:message for="z3" />
@@ -188,9 +188,9 @@ Free Lance Home
 
 
 							<p:commandButton value="Add Article"
-								actionListener="#{articleBean.doAddArticleFreeLance()}"
+								actionListener="#{authentificationBean.doAddArticleFreeLance()}"
 								update="@form,:table,panel3"
-								oncomplete="if(!args.validationFailed)#{articleBean.HideAddArticleDialog()}"
+								oncomplete="if(!args.validationFailed)#{authentificationBean.HideAddArticleDialog()}"
 								icon="ui-icon-check" validateClient="true">
 								<p:confirm header="Confirmation" message="Are you  sure ?" />
 							</p:commandButton>
@@ -209,20 +209,20 @@ Free Lance Home
 						<h:panelGrid columns="4" id="panel">
 
 							<p:outputLabel value="Release date" for="z1" />
-							<p:inputText value="#{articleBean.article.day}" id="z1"
+							<p:inputText value="#{authentificationBean.article2.day}" id="z1"
 								required="true" requiredMessage="date should not be empty !"></p:inputText>
 							<p:message for="z1" />
 							<h:outputText value="" />
 
 
 							<p:outputLabel value="Title"></p:outputLabel>
-							<p:inputText value="#{articleBean.article.title}" id="z2"
+							<p:inputText value="#{authentificationBean.article2.title}" id="z2"
 								required="true" requiredMessage="Title should not be empty !"></p:inputText>
 							<p:message for="z2" />
 							<h:outputText value="" />
 
 							<p:outputLabel value="Paragraph"></p:outputLabel>
-							<p:inputTextarea value="#{articleBean.article.paragraph}" id="z3"
+							<p:inputTextarea value="#{authentificationBean.article2.paragraph}" id="z3"
 								required="true"
 								requiredMessage="Paragraph  should not be empty !">
 							</p:inputTextarea>
@@ -233,7 +233,7 @@ Free Lance Home
 
 							<p></p>
 							<p:commandButton value="Update Article"
-								actionListener="#{articleBean.doUpdateArticleFreeLance()}"
+								actionListener="#{authentificationBean.doUpdateArticleJournalist()}"
 								update=":table,panel"
 								oncomplete="if(!args.validationFailed) { PF('articleUpdate').hide();}"
 								icon="ui-icon-check" validateClient="true">
@@ -254,24 +254,24 @@ Free Lance Home
 						<h:panelGrid columns="3" id="panel2">
 
 							<p:outputLabel value="Release date"></p:outputLabel>
-							<p:inputText value="#{articleBean.article.day}" id="z1"
+							<p:inputText value="#{authentificationBean.article2.day}" id="z1"
 								readonly="true"></p:inputText>
 							<p></p>
 
 							<p:outputLabel value="Title"></p:outputLabel>
-							<p:inputText value="#{articleBean.article.title}" id="z2"
+							<p:inputText value="#{authentificationBean.article2.title}" id="z2"
 								readonly="true"></p:inputText>
 							<p></p>
 
 							<p:outputLabel value="Paragraph"></p:outputLabel>
-							<p:inputTextarea value="#{articleBean.article.paragraph}" id="z3"
+							<p:inputTextarea value="#{authentificationBean.article2.paragraph}" id="z3"
 								readonly="true"></p:inputTextarea>
 							<p></p>
 
 
 
 							<p:commandButton value="Delete Article" icon="ui-icon-closethick"
-								actionListener="#{articleBean.doDeleteArticleFreeLance()}"
+								actionListener="#{authentificationBean.doDeleteArticleFreeLance()}"
 								update=":table" oncomplete="PF('articleDelete').hide();">
 								<p:confirm header="Confirmation" message="Are you  sure ?" />
 							</p:commandButton>

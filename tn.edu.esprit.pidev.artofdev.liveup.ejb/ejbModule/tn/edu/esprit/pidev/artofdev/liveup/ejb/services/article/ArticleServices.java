@@ -77,17 +77,20 @@ public ArticleServices(){
 
 
 	@Override
-	public List<Article> findAllArticleByTypeJournalist() {
-		Query query=entityManager.createQuery("select b from Article b where b.type = 'Journalist' ");
+	public List<Article> findAllArticleByTypeJournalist(int id) {
+		Query query=entityManager.createQuery("select b from Article b where b.type = 'Journalist'   and b.journalistIdd= :s");
+		query.setParameter("s", id);
 		return query.getResultList();
 	}
 
 
 
 	@Override
-	public List<Article> findAllArticleByTypeFreeLance() {
-		Query query=entityManager.createQuery("select b from Article b where b.type = 'FreeLance'");
+	public List<Article> findAllArticleByTypeFreeLance(int id) {
+		Query query=entityManager.createQuery("select b from Article b where b.type = 'FreeLance'  and b.freelanceIdd= :s");
+		query.setParameter("s", id);
 		return query.getResultList();
+		
 	}
 
 

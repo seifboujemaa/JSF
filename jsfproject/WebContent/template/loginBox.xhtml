@@ -24,6 +24,7 @@
 						<p:password value="#{authentificationBean.user.pwd}" required="true" requiredMessage="Password is required"/>
 						<p:growl id="growl" showDetail="true" sticky="true" />
 						
+						
 						<p:commandButton action="#{authentificationBean.doLogin()}"
 							value="#{msg.connexion}" id="loginSubmit"  update="growl" />
 						

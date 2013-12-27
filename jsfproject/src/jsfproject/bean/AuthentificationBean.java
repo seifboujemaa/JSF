@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.inject.Any;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -13,12 +15,14 @@ import javax.faces.context.FacesContext;
 
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.Administrator;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.Agent;
+import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.Article;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.ChefEditor;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.FreeLance;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.Journalist;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.Reporter;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.SubscribedClient;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.persistences.User;
+import tn.edu.esprit.pidev.artofdev.liveup.ejb.services.article.ArticleServicesLocal;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.services.freelance.FreelanceLocal;
 import tn.edu.esprit.pidev.artofdev.liveup.ejb.services.user.UserServicesLocal;
 
@@ -44,14 +48,30 @@ public class AuthentificationBean implements Serializable {
 	private UserServicesLocal userLocal;
 	@EJB
 	private FreelanceLocal localFreelanceLocal;
+	@EJB
+	private ArticleServicesLocal localArticle;
 
 	private FreeLance freeLance = new FreeLance();
+	private Article article = new Article();
+	private Article article2 = new Article();
 
 	private List<FreeLance> freeLances = new ArrayList<FreeLance>();
+	private List<Article> articlesJournalist = new ArrayList<Article>();
+	private List<Article> articlesFreeLance = new ArrayList<Article>();
 
 	private User user = new User();
 	private User user2 = new User();
 	private String userType;
+
+	
+	
+	public Article getArticle2() {
+		return article2;
+	}
+
+	public void setArticle2(Article article2) {
+		this.article2 = article2;
+	}
 
 	public User getUser2() {
 		return user2;
@@ -189,6 +209,38 @@ public class AuthentificationBean implements Serializable {
 		this.password = password;
 	}
 
+	public ArticleServicesLocal getLocalArticle() {
+		return localArticle;
+	}
+
+	public void setLocalArticle(ArticleServicesLocal localArticle) {
+		this.localArticle = localArticle;
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
+	public List<Article> getArticlesJournalist() {
+		return articlesJournalist;
+	}
+
+	public void setArticlesJournalist(List<Article> articlesJournalist) {
+		this.articlesJournalist = articlesJournalist;
+	}
+
+	public List<Article> getArticlesFreeLance() {
+		return articlesFreeLance;
+	}
+
+	public void setArticlesFreeLance(List<Article> articlesFreeLance) {
+		this.articlesFreeLance = articlesFreeLance;
+	}
+
 	public AuthentificationBean(String login, String password) {
 		super();
 		this.login = login;
@@ -270,8 +322,6 @@ public class AuthentificationBean implements Serializable {
 					nav = "/pages/FreeLance/freeLanceHome?faces-redirect=true";
 				}
 				if (user2 == null) {
-					
-					
 
 					FacesMessage msg = new FacesMessage(
 							FacesMessage.SEVERITY_WARN, "Oups",
@@ -315,6 +365,68 @@ public class AuthentificationBean implements Serializable {
 				"Success", "Your informations had been changed !");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		return null;
+	}
+
+	
+	public void init() {
+	articlesFreeLance = localArticle.findAllArticleByTypeFreeLance(user.getIdUser());
+    articlesJournalist = localArticle.findAllArticleByTypeJournalist(user.getIdUser());
+	}
+
+	public String doAddArticleFreeLance() {
+        article2.setFreelanceIdd(user.getIdUser());
+		localArticle.addArticleByTypeFreeLanceAndStatus(article2);
+		article2 = new Article();
+		articlesFreeLance = localArticle.findAllArticleByTypeFreeLance(user.getIdUser());
+		return null;
+	}
+
+	public String doAddArticleJournalist() {
+		article.setJournalistIdd(user.getIdUser());
+		localArticle.addArtilceByTypeJournalistAndStatus(article);
+		article = new Article();
+		articlesJournalist = localArticle.findAllArticleByTypeJournalist(user.getIdUser());
+		return null;
+	}
+	
+	public String doUpdateArticleFreeLance(){
+		localArticle.updateArticle(article2);
+		article2 = new Article();
+		articlesFreeLance = localArticle.findAllArticleByTypeFreeLance(user.getIdUser());
+		
+		return null;
+	}
+	
+	public String doDeleteArticleFreeLance(){
+		localArticle.deleteArticle(article2);
+		article2 = new Article();
+		articlesFreeLance = localArticle.findAllArticleByTypeFreeLance(user.getIdUser());
+		
+		return null;
+	}
+	
+	public String doUpdateArticleJournalist(){
+		localArticle.updateArticle(article);
+		article = new Article();
+		articlesJournalist = localArticle.findAllArticleByTypeJournalist(user.getIdUser());
+		
+		return null;
+	}
+	
+	public String doDeleteArticleJournalist(){
+		localArticle.deleteArticle(article);
+		article = new Article();
+		articlesJournalist = localArticle.findAllArticleByTypeJournalist(user.getIdUser());
+		
+		return null;
+	}
+
+	public String HideAddArticleDialog() {
+
+		article = new Article();
+
+		return "PF('articleAdd').hide();";
+
 	}
 
 }
