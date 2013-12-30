@@ -47,11 +47,7 @@ Reporter Home
 
 
 
-
-
-
-
-						<p:column>
+                        <p:column>
 							<p:commandButton id="selectButton"
 								oncomplete="PF('photoDelete').show()" value="Delete"
 								icon="ui-icon-closethick">
@@ -60,12 +56,20 @@ Reporter Home
 							</p:commandButton>
 						</p:column>
 
+                      					
+
+
+
+						
+
 
 
 					</p:dataTable>
 					<br></br>
 					<br></br>
 				</h:form>
+				
+		
 
 				<p:dialog header="Delete photo" widgetVar="photoDelete"
 					resizable="false" modal="true">
@@ -81,6 +85,9 @@ Reporter Home
 						</h:panelGrid>
 					</h:form>
 				</p:dialog>
+				
+				
+				
 
 
 
@@ -120,8 +127,8 @@ Reporter Home
 
 				<h:form id="table2">
 					<p:dataTable value="#{videoBean.videos}" var="v"
-						rendered="#{not empty videoBean.videos}"
-						paginator="true" rows="10" widgetVar="ficheTable"
+						rendered="#{not empty videoBean.videos}" paginator="true"
+						rows="10" widgetVar="ficheTable"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
 						rowsPerPageTemplate="5,10,15">
 
@@ -147,7 +154,7 @@ Reporter Home
 							</f:facet>
 							<h:outputText value="#{v.description}" />
 						</p:column>
-						
+
 						<p:column>
 							<f:facet name="header">
 								<h:outputText value="URL" />
@@ -207,7 +214,8 @@ Reporter Home
 
 						<p:growl id="growl2" showDetail="true" sticky="true" />
 						<p:commandButton value="Add video "
-							actionListener="#{videoBean.doAddVideo()}" update="growl2,@form,:table2"></p:commandButton>
+							actionListener="#{videoBean.doAddVideo()}"
+							update="growl2,@form,:table2"></p:commandButton>
 
 					</h:panelGrid>
 

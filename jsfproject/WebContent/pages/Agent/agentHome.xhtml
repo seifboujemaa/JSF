@@ -3,12 +3,288 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      template="/template/template.xhtml"> 
+      template="/template/template.xhtml"
+      xmlns:p="http://primefaces.org/ui"> 
 
 <ui:define name="titlecontent"> 
 Agent Home
 </ui:define>
-<ui:define name="content2"></ui:define>
- 
+<ui:define name="content2">
+
+<div id="content">
+			<div class="post">
+				<h2 class="title">Game management</h2>
+				<br></br>
+
+
+				<h:form id="table">
+					<p:dataTable value="#{matchBean.games}" var="g"
+						rendered="#{not empty matchBean.games}" paginator="true"
+						rows="10" widgetVar="ficheTable"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
+						rowsPerPageTemplate="5,10,15" >
+
+					<!-- 	<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Search   " />
+								<p:inputText id="globalFilter" onkeyup="ficheTable.filter()"
+									style="width:150px"></p:inputText>
+							</p:outputPanel>
+						</f:facet> -->
+						
+				     <f:facet name="header">  
+                             <p:outputPanel>  
+                                <h:outputText value="All Games" />  
+                              </p:outputPanel>  
+                     </f:facet> 
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first team" />
+							</f:facet>
+							<h:outputText value="#{g.team1}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Second team" />
+							</f:facet>
+							<h:outputText value="#{g.team2}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 1 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team1Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 2 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team2Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Refree" />
+							</f:facet>
+							<h:outputText value="#{g.refree}" />
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Date" />
+							</f:facet>
+							<h:outputText value="#{g.dateTime}" />
+						</p:column>
+						
+					
+						
+					
+
+
+						<!--     <f:facet name="footer">  
+            <p:commandButton id="UpdateButton" value="Update"  oncomplete="PF('agentUpdate').show()"/>  
+            <p:commandButton id="DeleteButton" value="Delete"  oncomplete="PF('agentUpdate').show()"/>
+              </f:facet>  -->
+
+						<p:column>
+							<p:commandButton id="selectButton"
+								oncomplete="PF('gameUpdate').show()" value="Update" icon="ui-icon-pencil"
+								update=":nono:panel">
+								<f:setPropertyActionListener value="#{g}"
+									target="#{matchBean.game}" />
+							</p:commandButton>
+						</p:column>
+
+
+						<p:column>
+							<p:commandButton id="selectButton2"
+								oncomplete="PF('gameDelete').show()" value="Delete" icon="ui-icon-circlesmall-close"
+								update=":momo:panel2">
+								<f:setPropertyActionListener value="#{g}"
+									target="#{matchBean.game}" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+
+
+					<p:commandButton id="showDialogButton" type="button" value="New"
+						onclick="PF('gameAdd').show()" icon="ui-icon-arrowreturn-1-n"/>
+
+				</h:form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<p:dialog header="Enter new agent" widgetVar="gameAdd"
+					resizable="false" modal="true">
+					<h:form id="bb">
+						<h:panelGrid columns="4" id="panel3">
+
+							<p:outputLabel value="Team 1"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team1}" id="z1" required="true" requiredMessage="team1 should not be empty !"></p:inputText>
+							<p:message for="z1" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Team 2"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team2}" id="z2" required="true" requiredMessage="team2 should not be empty !"></p:inputText>
+							<p:message for="z2" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="team 1 Goals"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team1Goals}" id="z3" required="true" requiredMessage="goals should not be empty !"></p:inputText>
+							<p:message for="z3" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="team 2 Goals"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team2Goals}" id="z4" required="true" requiredMessage="goals should not empty !"> </p:inputText>
+							<p:message for="z4" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Refree"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.refree}" id="z5" required="true" requiredMessage="Refree should not be empty !"></p:inputText>
+							<p:message for="z5" />
+							<h:outputText value="" />
+							
+							<p:outputLabel value="Date"></p:outputLabel>
+							<p:calendar value="#{matchBean.game.dateTime}" id="z6" required="true" requiredMessage="time  should not be empty !"></p:calendar>
+							<p:message for="z6" />
+							<h:outputText value="" />
+							
+						
+
+							<p:commandButton value="Add Game"
+								actionListener="#{matchBean.doAddMatch()}"
+								update="@form,:table,panel3"
+								oncomplete="if(!args.validationFailed)#{matchBean.hideAddGameDialog()}"
+								icon="ui-icon-check" validateClient="true"
+								><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+
+						</h:panelGrid>
+
+					</h:form>
+				</p:dialog>
+
+
+
+
+				<p:dialog header="Update existing agent" widgetVar="gameUpdate"
+					resizable="false" modal="true">
+					<h:form id="nono">
+						<h:panelGrid columns="4" id="panel">
+
+							<p:outputLabel value="Team 1"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team1}" id="z1" required="true" requiredMessage="team1 should not be empty !"></p:inputText>
+							<p:message for="z1" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Team 2"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team2}" id="z2" required="true" requiredMessage="team2 should not be empty !"></p:inputText>
+							<p:message for="z2" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="team 1 Goals"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team1Goals}" id="z3" required="true" requiredMessage="goals should not be empty !"></p:inputText>
+							<p:message for="z3" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="team 2 Goals"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team2Goals}" id="z4" required="true" requiredMessage="goals should not empty !"> </p:inputText>
+							<p:message for="z4" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Refree"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.refree}" id="z5" required="true" requiredMessage="Refree should not be empty !"></p:inputText>
+							<p:message for="z5" />
+							<h:outputText value="" />
+							
+							<p:outputLabel value="Date"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.dateTime}" id="z6" required="true" requiredMessage="time  should not be empty !"></p:inputText>
+							<p:message for="z6" />
+							<h:outputText value="" />
+							
+							<p:commandButton value="Update Game"
+								actionListener="#{matchBean.doUpdateMatch()}"
+								update=":table,panel"
+								oncomplete="if(!args.validationFailed) { PF('gameUpdate').hide();}"
+								icon="ui-icon-check" validateClient="true"><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+							<p></p>
+							<p></p>
+						</h:panelGrid>
+
+					</h:form>
+				</p:dialog>
+
+
+
+				<p:dialog header="Delete agent" widgetVar="gameDelete"
+					resizable="false" modal="true">
+					<h:form id="momo">
+						<h:panelGrid columns="4"  id="panel2" >
+
+							<p:outputLabel value="Team 1"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team1}" id="z1" required="true" requiredMessage="team1 should not be empty !" readonly="true"></p:inputText>
+							<p:message for="z1" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Team 2"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team2}" id="z2" required="true" requiredMessage="team2 should not be empty !" readonly="true"></p:inputText>
+							<p:message for="z2" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="team 1 Goals"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team1Goals}" id="z3" required="true" requiredMessage="goals should not be empty !" readonly="true"></p:inputText>
+							<p:message for="z3" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="team 2 Goals"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.team2Goals}" id="z4" required="true" requiredMessage="goals should not empty !" readonly="true"> </p:inputText>
+							<p:message for="z4" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="Refree"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.refree}" id="z5" required="true" requiredMessage="Refree should not be empty !" readonly="true"></p:inputText>
+							<p:message for="z5" />
+							<h:outputText value="" />
+							
+							<p:outputLabel value="Date"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.dateTime}" id="z6" required="true" requiredMessage="time  should not be empty !" readonly="true"></p:inputText>
+							<p:message for="z6" />
+							<h:outputText value="" />
+							
+							
+
+							<p:commandButton value="Delete Game" icon="ui-icon-closethick"
+								actionListener="#{matchBean.doDeleteMatch()}"
+								update=":table" oncomplete="PF('gameDelete').hide();"><p:confirm header="Confirmation" message="Are you  sure ?" /></p:commandButton>
+
+						</h:panelGrid>
+
+					</h:form>
+				</p:dialog>
+
+
+
+
+			</div>
+		</div>
+
+ </ui:define>
 
 </ui:composition>

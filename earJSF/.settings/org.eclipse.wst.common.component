@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="earJSF">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="tn.edu.esprit.pidev.artofdev.liveup.ejb.jar" deploy-path="/" handle="module:/resource/tn.edu.esprit.pidev.artofdev.liveup.ejb/tn.edu.esprit.pidev.artofdev.liveup.ejb">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jsfproject.war" deploy-path="/" handle="module:/resource/jsfproject/jsfproject">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
