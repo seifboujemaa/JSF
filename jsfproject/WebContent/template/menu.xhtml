@@ -20,7 +20,7 @@
 				<li><a href="#">Tournament shoulder</a></li>
 				<li><a href="#">Administration</a></li> -->
 				<li><h:commandLink action="/pages/adminPage" value="#{msg.store}" rendered="#{authentificationBean.bool}" /></li>
-				<li><h:commandLink action="/pages/adminPage" value="#{msg.tournament_shoulder}" rendered="#{authentificationBean.bool}" /></li>
+				<li><h:commandLink action="/pages/tounramentPage?faces-redirect=true" value="#{msg.tournament_shoulder}" rendered="#{authentificationBean.bool}" /></li>
 				<li><h:commandLink action="/pages/adminPage" value="#{msg.administration}" rendered="#{authentificationBean.boolAdministrator} " /></li>
 			   
 	

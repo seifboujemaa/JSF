@@ -29,7 +29,8 @@
 								<li><h:commandLink action="/pagesOther/GamePage?faces-redirect=true" value="Match" />  </li>
 							<h:form	id="menuForm" rendered="#{authentificationBean.bool}">
 								<li><a href="#">#{msg.store}</a></li>
-								<li><a href="#">#{msg.tournament_shoulder}</a></li>
+								
+								<li>  <p:commandLink action="/pages/tounramentPage?faces-redirect=true" value="#{msg.tournament_shoulder}" /> </li>
 								
 								<!-- <li><a href="#">#{msg.administration}</a></li> -->
 								<li>  <p:commandLink action="/pages/administrator/adminPage?faces-redirect=true" value="#{msg.administration}" rendered="#{authentificationBean.boolAdministrator}" /> </li>
