@@ -72,7 +72,7 @@ public class GameServices implements GameServicesRemote, GameServicesLocal {
 
 	@Override
 	public List<Game> findGameByGroup(String group) {
-		Query query=entityManager.createQuery("select g from Game g where group='" + group +  "' " );
+		Query query=entityManager.createQuery("select g from Game g where groupe='" + group +  "' " );
 		return query.getResultList();			
 	}
 	

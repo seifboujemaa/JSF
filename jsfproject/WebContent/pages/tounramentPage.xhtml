@@ -1,11 +1,449 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/template/template.xhtml"
+      xmlns:p="http://primefaces.org/ui"> 
+      
+      <ui:define name="titlecontent">Tournament shoulder</ui:define>
 
-<h:head></h:head> 
-<body> 
+	<ui:define name="content2">
+	
+	
+	<div id="content">
+			<div class="post">
+				<h2 class="title">Groups classification</h2>
+				<br></br>
+				<h:form id="table">
+					<p:dataTable value="#{tournamentBean.gamesA}" var="g" 
+						rendered="#{not empty tournamentBean.gamesA}" 
+						widgetVar="ficheTable">
+						
 
-</body> 
-</html>
+						
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Group A" />
+							</p:outputPanel>
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first team" />
+							</f:facet>
+							<h:outputText value="#{g.team1}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Second team" />
+							</f:facet>
+							<h:outputText value="#{g.team2}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 1 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team1Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 2 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team2Goals}" />
+						</p:column>
+
+					
+
+					</p:dataTable>
+					<br></br>
+					<p:dataTable value="#{tournamentBean.gamesB}" var="g" 
+						rendered="#{not empty tournamentBean.gamesB}" 
+						widgetVar="ficheTable">
+						
+
+						
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Group B" />
+							</p:outputPanel>
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first team" />
+							</f:facet>
+							<h:outputText value="#{g.team1}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Second team" />
+							</f:facet>
+							<h:outputText value="#{g.team2}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 1 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team1Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 2 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team2Goals}" />
+						</p:column>
+
+					
+
+					</p:dataTable>
+					<br></br>
+					<p:dataTable value="#{tournamentBean.gamesC}" var="g" 
+						rendered="#{not empty tournamentBean.gamesC}" 
+						widgetVar="ficheTable">
+						
+
+						
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Group C" />
+							</p:outputPanel>
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first team" />
+							</f:facet>
+							<h:outputText value="#{g.team1}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Second team" />
+							</f:facet>
+							<h:outputText value="#{g.team2}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 1 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team1Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 2 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team2Goals}" />
+						</p:column>
+
+					
+
+					</p:dataTable>
+					<br></br>
+					
+					<p:dataTable value="#{tournamentBean.gamesD}" var="g" 
+						rendered="#{not empty tournamentBean.gamesD}" 
+						widgetVar="ficheTable">
+						
+
+						
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Group D" />
+							</p:outputPanel>
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first team" />
+							</f:facet>
+							<h:outputText value="#{g.team1}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Second team" />
+							</f:facet>
+							<h:outputText value="#{g.team2}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 1 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team1Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 2 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team2Goals}" />
+						</p:column>
+
+					
+
+					</p:dataTable>
+					<br></br>
+					
+					
+					
+
+
+					
+
+				</h:form>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div class="post">
+				<h2 class="title">Finals classification</h2>
+				<br></br>
+				<h:form id="title">
+				
+				
+				<p:dataTable value="#{tournamentBean.game1_8}" var="g" 
+						rendered="#{not empty tournamentBean.game1_8}" 
+						widgetVar="ficheTable">
+						
+
+						
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="1/8" />
+							</p:outputPanel>
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first team" />
+							</f:facet>
+							<h:outputText value="#{g.team1}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Second team" />
+							</f:facet>
+							<h:outputText value="#{g.team2}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 1 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team1Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 2 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team2Goals}" />
+						</p:column>
+
+					
+
+					</p:dataTable>
+					<br></br>
+					
+					
+					<p:dataTable value="#{tournamentBean.game1_4}" var="g" 
+						rendered="#{not empty tournamentBean.game1_4}" 
+						widgetVar="ficheTable">
+						
+
+						
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="1/4" />
+							</p:outputPanel>
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first team" />
+							</f:facet>
+							<h:outputText value="#{g.team1}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Second team" />
+							</f:facet>
+							<h:outputText value="#{g.team2}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 1 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team1Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 2 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team2Goals}" />
+						</p:column>
+
+					
+
+					</p:dataTable>
+					<br></br>
+					
+					<p:dataTable value="#{tournamentBean.game1_2}" var="g" 
+						rendered="#{not empty tournamentBean.game1_2}" 
+						widgetVar="ficheTable">
+						
+
+						
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="1/2" />
+							</p:outputPanel>
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first team" />
+							</f:facet>
+							<h:outputText value="#{g.team1}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Second team" />
+							</f:facet>
+							<h:outputText value="#{g.team2}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 1 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team1Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 2 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team2Goals}" />
+						</p:column>
+
+					
+
+					</p:dataTable>
+					<br></br>
+					
+					<p:dataTable value="#{tournamentBean.game1_1}" var="g" 
+						rendered="#{not empty tournamentBean.game1_1}" 
+						widgetVar="ficheTable">
+						
+
+						
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Final" />
+							</p:outputPanel>
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first team" />
+							</f:facet>
+							<h:outputText value="#{g.team1}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Second team" />
+							</f:facet>
+							<h:outputText value="#{g.team2}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 1 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team1Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 2 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team2Goals}" />
+						</p:column>
+
+					
+
+					</p:dataTable>
+					<br></br>
+					
+				
+				
+				
+				
+				</h:form>
+				
+				
+				
+		  </div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	</ui:define>
+
+</ui:composition>
