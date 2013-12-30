@@ -30,6 +30,15 @@ public class Game implements Serializable {
 	private String Team1;
 	private String Team2;
 	
+	
+	private int shotontarget;
+	private int shotfromoutside;
+	private int fault ;
+	private int corners ;
+	private int penalty;
+	
+	
+	
 	private Agent agent;
 	private Stadium stadium;
 	
@@ -167,6 +176,38 @@ public class Game implements Serializable {
 	public void setTeam2(String team2) {
 		Team2 = team2;
 	}
+	public int getShotontarget() {
+		return shotontarget;
+	}
+	public void setShotontarget(int shotontarget) {
+		this.shotontarget = shotontarget;
+	}
+	public int getShotfromoutside() {
+		return shotfromoutside;
+	}
+	public void setShotfromoutside(int shotfromoutside) {
+		this.shotfromoutside = shotfromoutside;
+	}
+	public int getFault() {
+		return fault;
+	}
+	public void setFault(int fault) {
+		this.fault = fault;
+	}
+	public int getCorners() {
+		return corners;
+	}
+	public void setCorners(int corners) {
+		this.corners = corners;
+	}
+	public int getPenalty() {
+		return penalty;
+	}
+	public void setPenalty(int penalty) {
+		this.penalty = penalty;
+	}
+	
+	
 	
 	
 	

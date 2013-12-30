@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/template/template.xhtml"
+      xmlns:p="http://primefaces.org/ui"> 
+      
+      <ui:define name="titlecontent">Games</ui:define>
+
+	<ui:define name="content2">
+	
+	
+	<div id="content">
+			<div class="post">
+				<h2 class="title">Game management</h2>
+				<br></br>
+
+
+				<h:form id="table">
+					<p:dataTable value="#{matchBean.games}" var="g" 
+						rendered="#{not empty matchBean.games}" paginator="true" rows="10"
+						widgetVar="ficheTable"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
+						rowsPerPageTemplate="5,10,15">
+
+						<!-- 	<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Search   " />
+								<p:inputText id="globalFilter" onkeyup="ficheTable.filter()"
+									style="width:150px"></p:inputText>
+							</p:outputPanel>
+						</f:facet> -->
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="All Games" />
+							</p:outputPanel>
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="first team" />
+							</f:facet>
+							<h:outputText value="#{g.team1}" />
+						</p:column>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Second team" />
+							</f:facet>
+							<h:outputText value="#{g.team2}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 1 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team1Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Team 2 Goals" />
+							</f:facet>
+							<h:outputText value="#{g.team2Goals}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Refree" />
+							</f:facet>
+							<h:outputText value="#{g.refree}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Date" />
+							</f:facet>
+							<h:outputText value="#{g.dateTime}" />
+						</p:column>
+						
+							<p:column>
+							<p:commandButton id="selectButton5"
+								oncomplete="PF('viewEvent').show()" value="View events"
+								icon="ui-icon-arrowthick-1-ne" update=":form11:panel11">
+								<f:setPropertyActionListener value="#{g}"
+									target="#{matchBean.game}" />
+							</p:commandButton>
+						</p:column>
+	
+	
+	
+	
+	
+	</p:dataTable>
+	</h:form>
+	
+	
+	
+	<p:dialog header="Match details" widgetVar="viewEvent"
+					resizable="false" modal="true">
+					<h:form id="form11">
+						<h:panelGrid columns="4" id="panel11">
+
+							<p:outputLabel value="shot on target"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.shotontarget}" id="z1"
+								required="true" readonly="true"
+								requiredMessage="this field should not be empty !"></p:inputText>
+							<p:message for="z1" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="short from outside"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.shotfromoutside}" id="z2"
+								required="true" readonly="true"
+								requiredMessage="this field should not be empty !"></p:inputText>
+							<p:message for="z2" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="fault"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.fault}" id="z3"
+								required="true" readonly="true"
+								requiredMessage="this field should not be empty !"></p:inputText>
+							<p:message for="z3" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="corners"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.corners}" id="z4"
+								required="true" requiredMessage="this field should not empty !" readonly="true">
+							</p:inputText>
+							<p:message for="z4" />
+							<h:outputText value="" />
+
+							<p:outputLabel value="penalty"></p:outputLabel>
+							<p:inputText value="#{matchBean.game.penalty}" id="z5"
+								required="true" readonly="true"
+								requiredMessage="this field should not be empty !"></p:inputText>
+							<p:message for="z5" />
+							<h:outputText value="" />
+
+
+
+
+
+						
+
+						</h:panelGrid>
+
+					</h:form>
+				</p:dialog>
+	
+	
+	
+	</div>
+	</div>
+	</ui:define>
+      
+      
+      
+      
+      
+      
+
+</ui:composition>
