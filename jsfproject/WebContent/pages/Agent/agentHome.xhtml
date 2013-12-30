@@ -17,7 +17,7 @@ Agent Home
 
 
 				<h:form id="table">
-					<p:dataTable value="#{matchBean.games}" var="g" 
+					<p:dataTable value="#{matchBean.games}" var="g"
 						rendered="#{not empty matchBean.games}" paginator="true" rows="10"
 						widgetVar="ficheTable"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink}"
@@ -88,7 +88,7 @@ Agent Home
 							<h:outputText value="#{g.groupe}" />
 						</p:column>
 
-						<p:column >
+						<p:column>
 							<f:facet name="header">
 								<h:outputText value="Type" />
 							</f:facet>
@@ -106,7 +106,7 @@ Agent Home
               </f:facet>  -->
 
 						<p:column>
-							<p:commandButton id="selectButton"  style="font-size:10px"
+							<p:commandButton id="selectButton" style="font-size:10px"
 								oncomplete="PF('gameUpdate').show()" value="Update"
 								icon="ui-icon-pencil" update=":nono:panel">
 								<f:setPropertyActionListener value="#{g}"
@@ -117,8 +117,9 @@ Agent Home
 
 						<p:column>
 							<p:commandButton id="selectButton2"
-								oncomplete="PF('gameDelete').show()" value="Delete" style="font-size:10px"
-								icon="ui-icon-circlesmall-close" update=":momo:panel2">
+								oncomplete="PF('gameDelete').show()" value="Delete"
+								style="font-size:10px" icon="ui-icon-circlesmall-close"
+								update=":momo:panel2">
 								<f:setPropertyActionListener value="#{g}"
 									target="#{matchBean.game}" />
 							</p:commandButton>
@@ -255,18 +256,53 @@ Agent Home
 							<p:message for="z6" />
 							<h:outputText value="" />
 
-							<p:outputLabel value="Group"></p:outputLabel>
-							<p:inputText value="#{matchBean.game.groupe}"></p:inputText>
-							<p:message for="z6" />
 							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+
+
+							<!-- 							<p:outputLabel value="Group"></p:outputLabel> -->
+							<!-- 							<p:inputText value="#{matchBean.game.groupe}"></p:inputText> -->
+							<!-- 							<p:message for="z6" /> -->
+							<!-- 							<h:outputText value="" /> -->
+
+
+
+							<p:outputLabel value="Group"></p:outputLabel>
+							<p:selectOneMenu value="#{matchBean.game.groupe}">
+								<f:selectItem itemLabel="empty" itemValue="empty" />
+								<f:selectItem itemLabel="A" itemValue="A" />
+								<f:selectItem itemLabel="B" itemValue="B" />
+								<f:selectItem itemLabel="C" itemValue="C" />
+								<f:selectItem itemLabel="D" itemValue="D" />
+							</p:selectOneMenu>
+							<h:outputText value="" />
+
+							<!-- 							<h:outputText value="" /> -->
+							<!-- 							<h:outputText value="" /> -->
+
+
+							<!-- 							<p:outputLabel value="Type"></p:outputLabel> -->
+							<!-- 							<p:inputText value="#{matchBean.game.type}" id="z7" -->
+							<!-- 								required="true" requiredMessage="type should not be empty !"></p:inputText> -->
+							<!-- 							<p:message for="z7" /> -->
+							<!-- 							<h:outputText value="" /> -->
+
 
 							<p:outputLabel value="Type"></p:outputLabel>
-							<p:inputText value="#{matchBean.game.type}" id="z7"
-								required="true" requiredMessage="type should not be empty !"></p:inputText>
-							<p:message for="z7" />
+							<p:selectOneMenu value="#{matchBean.game.type}">
+								<f:selectItem itemLabel="empty" itemValue="empty" />
+								<f:selectItem itemLabel="1/8" itemValue="1/8" />
+								<f:selectItem itemLabel="1/4" itemValue="1/4" />
+								<f:selectItem itemLabel="1/2" itemValue="1/2" />
+								<f:selectItem itemLabel="Final" itemValue="1/1" />
+							</p:selectOneMenu>
 							<h:outputText value="" />
+							<!-- 							<h:outputText value="" /> -->
+							<!-- 							<h:outputText value="" /> -->
 
 
+							<h:outputText value="" />
 
 							<p:commandButton value="Add Game"
 								actionListener="#{matchBean.doAddMatch()}"
@@ -326,17 +362,43 @@ Agent Home
 							<p:message for="z6" />
 							<h:outputText value="" />
 
-							<p:outputLabel value="Group"></p:outputLabel>
-							<p:inputText value="#{matchBean.game.groupe}"></p:inputText>
-							<p:message for="z6" />
 							<h:outputText value="" />
+							<h:outputText value="" />
+							<h:outputText value="" />
+
+							<!-- 							<p:outputLabel value="Group"></p:outputLabel> -->
+							<!-- 							<p:inputText value="#{matchBean.game.groupe}"></p:inputText> -->
+							<!-- 							<p:message for="z6" /> -->
+							<!-- 							<h:outputText value="" /> -->
+
+							<p:outputLabel value="Group"></p:outputLabel>
+							<p:selectOneMenu value="#{matchBean.game.groupe}">
+								<f:selectItem itemLabel="empty" itemValue="empty" />
+								<f:selectItem itemLabel="A" itemValue="A" />
+								<f:selectItem itemLabel="B" itemValue="B" />
+								<f:selectItem itemLabel="C" itemValue="C" />
+								<f:selectItem itemLabel="D" itemValue="D" />
+							</p:selectOneMenu>
+							<h:outputText value="" />
+
+							<!-- 							<p:outputLabel value="Type"></p:outputLabel> -->
+							<!-- 							<p:inputText value="#{matchBean.game.type}" id="z7" -->
+							<!-- 								required="true" requiredMessage="type should not be empty !"></p:inputText> -->
+							<!-- 							<p:message for="z7" /> -->
+							<!-- 							<h:outputText value="" /> -->
 
 							<p:outputLabel value="Type"></p:outputLabel>
-							<p:inputText value="#{matchBean.game.type}" id="z7"
-								required="true" requiredMessage="type should not be empty !"></p:inputText>
-							<p:message for="z7" />
+							<p:selectOneMenu value="#{matchBean.game.type}">
+								<f:selectItem itemLabel="empty" itemValue="empty" />
+								<f:selectItem itemLabel="1/8" itemValue="1/8" />
+								<f:selectItem itemLabel="1/4" itemValue="1/4" />
+								<f:selectItem itemLabel="1/2" itemValue="1/2" />
+								<f:selectItem itemLabel="Final" itemValue="1/1" />
+							</p:selectOneMenu>
 							<h:outputText value="" />
 
+							<h:outputText value="" />
+							<h:outputText value="" />
 							<p:commandButton value="Update Game"
 								actionListener="#{matchBean.doUpdateMatch()}"
 								update=":table,panel"
