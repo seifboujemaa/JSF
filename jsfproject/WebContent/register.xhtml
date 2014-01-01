@@ -47,9 +47,10 @@
 						<h:panelGrid columns="4" id="panel3">
 
 							<p:outputLabel value="First Name"></p:outputLabel>
-							<p:inputText value="#{freeLanceBean.freelance.firstName}" id="z1" required="true" requiredMessage="First name should not be empty !"></p:inputText>
+							<p:inputText value="#{freeLanceBean.freelance.firstName}" id="z1"  ><f:converter converterId="firstNameConverter" /></p:inputText>
 							<p:message for="z1" />
 							<h:outputText value="" />
+
 
 							<p:outputLabel value="Last Name"></p:outputLabel>
 							<p:inputText value="#{freeLanceBean.freelance.lastName}" id="z2" required="true" requiredMessage="Last name should not be empty !"></p:inputText>

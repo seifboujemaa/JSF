@@ -11,12 +11,18 @@ public class ValidatorFirstName implements Converter{
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		if(arg2.equals("")){
+		if(arg2.indexOf("0") != -1 ){
 		FacesMessage msg = new FacesMessage("Error",
 	            "FirstName should not contain number letters");
 	         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 	         throw new ConverterException(msg);
 	         }
+		if(arg2.equals("")){
+			FacesMessage msg = new FacesMessage("Error",
+		            "First name should not be empty !");
+		         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		         throw new ConverterException(msg);
+		         }
 		return null;
 	}
 
