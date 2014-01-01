@@ -13,7 +13,7 @@ public class ValidatorFirstName implements Converter{
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
 		if(arg2.indexOf("0") != -1 ){
 		FacesMessage msg = new FacesMessage("Error",
-	            "FirstName should not contain number letters");
+	            "FirstName should not contain 0");
 	         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 	         throw new ConverterException(msg);
 	         }
